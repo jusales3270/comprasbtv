@@ -1,959 +1,1668 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComprasGov · Boituva</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* ─── TOKENS ─────────────────────────────────────────── */
-:root{
-  /* Tema Escuro (padrão) */
-  --ink:    #0d1117;
-  --ink2:   #1c2430;
-  --ink3:   #253040;
-  --line:   #2a3a4d;
-  --line2:  #1e2d3d;
-  --dust:   #4a6070;
-  --fog:    #7a9ab0;
-  --mist:   #a8c0d0;
-  --paper:  #d8e8f0;
-  --white:  #f0f6fa;
-  --gold:   #e8b84a;
-  --goldd:  rgba(232,184,74,.12);
-  --goldb:  rgba(232,184,74,.25);
-  --jade:   #3ecf8e;
-  --jadeb:  rgba(62,207,142,.12);
-  --ruby:   #f06060;
-  --rubyb:  rgba(240,96,96,.12);
-  --sapph:  #4a9edd;
-  --sapphb: rgba(74,158,221,.12);
-  --amber:  #e8923a;
-  --amberb: rgba(232,146,58,.12);
-  --serif:  'Instrument Serif', serif;
-  --sans:   'Syne', sans-serif;
-  --mono:   'JetBrains Mono', monospace;
-  --r:      6px;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComprasGov · Boituva</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      /* Tema Escuro (padrão) */
+      --ink: #0d1117;
+      --ink2: #1c2430;
+      --ink3: #253040;
+      --line: #2a3a4d;
+      --line2: #1e2d3d;
+      --dust: #4a6070;
+      --fog: #7a9ab0;
+      --mist: #a8c0d0;
+      --paper: #d8e8f0;
+      --white: #f0f6fa;
+      --gold: #e8b84a;
+      --goldd: rgba(232, 184, 74, .12);
+      --goldb: rgba(232, 184, 74, .25);
+      --jade: #3ecf8e;
+      --jadeb: rgba(62, 207, 142, .12);
+      --ruby: #f06060;
+      --rubyb: rgba(240, 96, 96, .12);
+      --sapph: #4a9edd;
+      --sapphb: rgba(74, 158, 221, .12);
+      --amber: #e8923a;
+      --amberb: rgba(232, 146, 58, .12);
+      --serif: 'Instrument Serif', serif;
+      --sans: 'Syne', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --r: 6px;
+    }
 
-/* Tema Claro */
-[data-theme="light"] {
-  --ink:    #f6f8fa;
-  --ink2:   #ffffff;
-  --ink3:   #f3f4f6;
-  --line:   #d1d5db;
-  --line2:  #e5e7eb;
-  --dust:   #6b7280;
-  --fog:    #4b5563;
-  --mist:   #374151;
-  --paper:  #1f2937;
-  --white:  #111827;
-  --gold:   #d97706;
-  --goldd:  rgba(217,119,6,.12);
-  --goldb:  rgba(217,119,6,.25);
-  --jade:   #059669;
-  --jadeb:  rgba(5,150,105,.12);
-  --ruby:   #dc2626;
-  --rubyb:  rgba(220,38,38,.12);
-  --sapph:  #2563eb;
-  --sapphb: rgba(37,99,235,.12);
-  --amber:  #d97706;
-  --amberb: rgba(217,119,6,.12);
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;transition:background-color .3s ease,color .3s ease;}
-html *{transition:background-color .3s ease,border-color .3s ease,color .3s ease;}
-body{
-  background:var(--ink);
-  color:var(--paper);
-  font-family:var(--sans);
-  min-height:100vh;
-  display:flex;
-  font-size:14px;
-  line-height:1.5;
-}
-::selection{background:var(--goldb);color:var(--gold);}
-::-webkit-scrollbar{width:5px;height:5px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+    /* Tema Claro */
+    [data-theme="light"] {
+      --ink: #f6f8fa;
+      --ink2: #ffffff;
+      --ink3: #f3f4f6;
+      --line: #d1d5db;
+      --line2: #e5e7eb;
+      --dust: #6b7280;
+      --fog: #4b5563;
+      --mist: #374151;
+      --paper: #1f2937;
+      --white: #111827;
+      --gold: #d97706;
+      --goldd: rgba(217, 119, 6, .12);
+      --goldb: rgba(217, 119, 6, .25);
+      --jade: #059669;
+      --jadeb: rgba(5, 150, 105, .12);
+      --ruby: #dc2626;
+      --rubyb: rgba(220, 38, 38, .12);
+      --sapph: #2563eb;
+      --sapphb: rgba(37, 99, 235, .12);
+      --amber: #d97706;
+      --amberb: rgba(217, 119, 6, .12);
+    }
 
-/* ─── SIDEBAR ─────────────────────────────────────────── */
-.sb{
-  width:220px;flex-shrink:0;
-  background:var(--ink2);
-  border-right:1px solid var(--line);
-  position:fixed;top:0;left:0;bottom:0;
-  display:flex;flex-direction:column;
-  z-index:200;overflow-y:auto;
-}
-.sb-logo{
-  padding:20px 16px 14px;
-  border-bottom:1px solid var(--line);
-}
-.sb-logo .brand{
-  font-family:var(--serif);
-  font-size:22px;color:var(--gold);
-  font-style:italic;line-height:1;
-}
-.sb-logo .sub{
-  font-family:var(--mono);font-size:9px;
-  color:var(--dust);letter-spacing:.5px;margin-top:3px;
-}
-.sb-nav{flex:1;padding:10px 0;}
-.sb-grp{
-  font-family:var(--mono);font-size:9px;
-  color:var(--dust);letter-spacing:1.5px;text-transform:uppercase;
-  padding:10px 16px 4px;
-}
-.sb-item{
-  display:flex;align-items:center;gap:10px;
-  padding:8px 16px;font-size:12px;font-weight:500;
-  color:var(--fog);cursor:pointer;
-  border-left:2px solid transparent;
-  transition:all .15s;
-}
-.sb-item:hover{background:var(--ink3);color:var(--paper);}
-.sb-item.on{
-  background:var(--goldd);
-  color:var(--gold);
-  border-left-color:var(--gold);
-}
-.sb-item .ico{font-size:14px;width:18px;text-align:center;}
-.sb-foot{
-  padding:12px 16px;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:9px;color:var(--dust);
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ─── MAIN ─────────────────────────────────────────── */
-.main{margin-left:220px;flex:1;display:flex;flex-direction:column;min-width:0;}
+    html {
+      scroll-behavior: smooth;
+      transition: background-color .3s ease, color .3s ease;
+    }
 
-/* ─── TOPBAR ─────────────────────────────────────────── */
-.top{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 24px;
-  border-bottom:1px solid var(--line);
-  background:var(--ink);
-  position:sticky;top:0;z-index:100;
-  gap:16px;
-}
-.top-l h1{font-size:16px;font-weight:700;color:var(--white);}
-.top-l p{font-family:var(--mono);font-size:10px;color:var(--dust);margin-top:1px;}
-.top-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+    html * {
+      transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+    }
 
-/* ─── THEME TOGGLE ───────────────────────────────────── */
-.theme-toggle{
-  width:32px;height:32px;border-radius:50%;
-  border:1px solid var(--line);background:var(--ink2);
-  color:var(--fog);cursor:pointer;font-size:14px;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;padding:0;
-}
-.theme-toggle:hover{
-  background:var(--ink3);color:var(--gold);border-color:var(--gold);
-}
-.theme-toggle .theme-icon{
-  line-height:1;
-}
-[data-theme="light"] .theme-toggle{
-  background:var(--ink3);
-}
-[data-theme="light"] .theme-toggle:hover{
-  background:var(--line);
-}
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
-.badge{
-  font-family:var(--mono);font-size:9px;
-  padding:3px 9px;border-radius:20px;
-  border:1px solid;letter-spacing:.3px;
-  white-space:nowrap;
-}
-.badge.g{background:var(--jadeb);color:var(--jade);border-color:rgba(62,207,142,.3);}
-.badge.y{background:var(--goldd);color:var(--gold);border-color:var(--goldb);}
-.badge.r{background:var(--rubyb);color:var(--ruby);border-color:rgba(240,96,96,.25);}
-.badge.b{background:var(--sapphb);color:var(--sapph);border-color:rgba(74,158,221,.25);}
+    ::selection {
+      background: var(--goldb);
+      color: var(--gold);
+    }
 
-/* ─── PÁGINA ─────────────────────────────────────────── */
-.page{display:none;padding:24px;flex-direction:column;gap:18px;}
-.page.on{display:flex;}
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
 
-/* ─── TOAST ─────────────────────────────────────────── */
-#toast{
-  position:fixed;bottom:24px;right:24px;z-index:9999;
-  display:flex;flex-direction:column;gap:8px;
-}
-.toast-item{
-  padding:10px 16px;border-radius:var(--r);
-  font-size:12px;font-family:var(--mono);
-  border:1px solid;min-width:220px;
-  animation:toastIn .25s ease;
-}
-@keyframes toastIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.toast-item.ok{background:var(--jadeb);color:var(--jade);border-color:rgba(62,207,142,.3);}
-.toast-item.err{background:var(--rubyb);color:var(--ruby);border-color:rgba(240,96,96,.3);}
-.toast-item.info{background:var(--sapphb);color:var(--sapph);border-color:rgba(74,158,221,.3);}
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
-/* ─── LOADER ─────────────────────────────────────────── */
-.loader{
-  display:flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:11px;color:var(--dust);
-  padding:16px 0;
-}
-.spin{
-  width:14px;height:14px;border-radius:50%;
-  border:2px solid var(--line);border-top-color:var(--gold);
-  animation:spin .7s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg);}}
+    ::-webkit-scrollbar-thumb {
+      background: var(--line);
+      border-radius: 3px;
+    }
 
-/* ─── CARDS ─────────────────────────────────────────── */
-.card{
-  background:var(--ink2);
-  border:1px solid var(--line);
-  border-radius:var(--r);
-  overflow:hidden;
-}
-.card-h{
-  padding:12px 16px;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.card-h .ct{font-size:12px;font-weight:600;color:var(--white);}
-.card-h .cs{font-family:var(--mono);font-size:9px;color:var(--dust);}
-.card-b{padding:16px;}
+    /* ─── SIDEBAR ─────────────────────────────────────────── */
+    .sb {
+      width: 220px;
+      flex-shrink: 0;
+      background: var(--ink2);
+      border-right: 1px solid var(--line);
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 200;
+      overflow-y: auto;
+    }
 
-/* ─── METRICS ─────────────────────────────────────────── */
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
-@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr);}}
-.mc{
-  background:var(--ink2);border:1px solid var(--line);
-  border-radius:var(--r);padding:14px 16px;
-  position:relative;overflow:hidden;
-}
-.mc::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-}
-.mc.g::after{background:var(--jade);}
-.mc.y::after{background:var(--gold);}
-.mc.r::after{background:var(--ruby);}
-.mc.b::after{background:var(--sapph);}
-.mc.a::after{background:var(--amber);}
-.mc .lbl{font-family:var(--mono);font-size:9px;color:var(--dust);text-transform:uppercase;letter-spacing:.8px;}
-.mc .val{font-family:var(--serif);font-size:30px;font-style:italic;margin:4px 0 2px;line-height:1;}
-.mc .sub{font-size:10px;color:var(--fog);}
+    .sb-logo {
+      padding: 20px 16px 14px;
+      border-bottom: 1px solid var(--line);
+    }
 
-/* ─── GRID ─────────────────────────────────────────── */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-@media(max-width:900px){.g2,.g3{grid-template-columns:1fr;}}
+    .sb-logo .brand {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--gold);
+      font-style: italic;
+      line-height: 1;
+    }
 
-/* ─── TABELA ─────────────────────────────────────────── */
-.tbl{width:100%;border-collapse:collapse;}
-.tbl th{
-  font-family:var(--mono);font-size:9px;
-  text-transform:uppercase;letter-spacing:.8px;color:var(--dust);
-  padding:0 0 8px;border-bottom:1px solid var(--line);
-  text-align:left;
-}
-.tbl td{
-  font-size:11px;padding:9px 8px 9px 0;
-  border-bottom:1px solid var(--line2);
-  vertical-align:middle;
-}
-.tbl tr:last-child td{border-bottom:none;}
-.tbl tr:hover td{background:rgba(255,255,255,.02);}
-.mono{font-family:var(--mono);color:var(--fog);}
-.dim{color:var(--fog);}
-.num-g{font-family:var(--mono);color:var(--jade);}
-.num-r{font-family:var(--mono);color:var(--ruby);}
-.num-y{font-family:var(--mono);color:var(--gold);font-weight:500;}
+    .sb-logo .sub {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dust);
+      letter-spacing: .5px;
+      margin-top: 3px;
+    }
 
-/* ─── FASE BADGE ─────────────────────────────────────── */
-.fase{
-  display:inline-flex;align-items:center;gap:5px;
-  font-family:var(--mono);font-size:9px;
-  padding:2px 8px;border-radius:3px;border:1px solid;
-  white-space:nowrap;
-}
-.fase.DFD{background:rgba(74,158,221,.1);color:var(--sapph);border-color:rgba(74,158,221,.25);}
-.fase.ETP{background:rgba(232,184,74,.1);color:var(--gold);border-color:var(--goldb);}
-.fase.TR{background:rgba(232,146,58,.1);color:var(--amber);border-color:rgba(232,146,58,.25);}
-.fase.EDITAL{background:rgba(160,100,220,.1);color:#b070f0;border-color:rgba(160,100,220,.25);}
-.fase.LICITACAO{background:rgba(62,207,142,.1);color:var(--jade);border-color:rgba(62,207,142,.25);}
-.fase.CONTRATO{background:rgba(62,207,142,.15);color:var(--jade);border-color:rgba(62,207,142,.4);}
-.fase.EXECUCAO{background:rgba(62,207,142,.2);color:#2ef09e;border-color:rgba(62,207,142,.5);}
-.fase.ENCERRADO{background:rgba(74,96,112,.15);color:var(--dust);border-color:var(--line);}
+    .sb-nav {
+      flex: 1;
+      padding: 10px 0;
+    }
 
-/* ─── PRIORIDADE ─────────────────────────────────────── */
-.prio{display:inline-block;width:7px;height:7px;border-radius:50%;}
-.prio.critica{background:var(--ruby);box-shadow:0 0 6px var(--ruby);}
-.prio.alta{background:var(--gold);}
-.prio.normal{background:var(--sapph);}
-.prio.baixa{background:var(--dust);}
+    .sb-grp {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dust);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px 16px 4px;
+    }
 
-/* ─── STATUS CHECK ───────────────────────────────────── */
-.chk{display:inline-flex;align-items:center;gap:6px;font-size:10px;}
-.chk .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.chk.ok .dot{background:var(--jade);}
-.chk.pendente .dot{background:var(--sapph);}
-.chk.alerta .dot{background:var(--gold);}
-.chk.bloqueante .dot{background:var(--ruby);box-shadow:0 0 5px var(--ruby);}
+    .sb-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--fog);
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: all .15s;
+    }
 
-/* ─── PRAZO COUNTDOWN ────────────────────────────────── */
-.countdown{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:var(--mono);font-size:11px;
-  padding:3px 10px;border-radius:3px;
-}
-.countdown.critico{background:var(--rubyb);color:var(--ruby);border:1px solid rgba(240,96,96,.3);}
-.countdown.atencao{background:var(--goldd);color:var(--gold);border:1px solid var(--goldb);}
-.countdown.ok{background:var(--jadeb);color:var(--jade);border:1px solid rgba(62,207,142,.3);}
-.countdown.vencido{background:rgba(100,30,30,.3);color:#f08080;border:1px solid rgba(200,60,60,.3);}
+    .sb-item:hover {
+      background: var(--ink3);
+      color: var(--paper);
+    }
 
-/* ─── FORMS ──────────────────────────────────────────── */
-.fgroup{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
-.flabel{font-family:var(--mono);font-size:10px;color:var(--fog);letter-spacing:.3px;}
-.finput, .fselect, .ftextarea{
-  background:var(--ink3);border:1px solid var(--line);
-  color:var(--paper);border-radius:var(--r);
-  padding:8px 12px;font-size:12px;font-family:var(--sans);
-  transition:border-color .15s;width:100%;
-}
-.finput:focus,.fselect:focus,.ftextarea:focus{
-  outline:none;border-color:var(--gold);
-}
-.ftextarea{resize:vertical;min-height:80px;line-height:1.5;}
-.fselect option{background:var(--ink2);}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+    .sb-item.on {
+      background: var(--goldd);
+      color: var(--gold);
+      border-left-color: var(--gold);
+    }
 
-/* ─── BUTTONS ────────────────────────────────────────── */
-.btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 16px;border-radius:var(--r);
-  font-size:11px;font-weight:600;font-family:var(--sans);
-  cursor:pointer;transition:all .15s;border:1px solid;
-  white-space:nowrap;
-}
-.btn:disabled{opacity:.4;cursor:not-allowed;}
-.btn-primary{background:var(--gold);color:var(--ink);border-color:var(--gold);}
-.btn-primary:hover:not(:disabled){background:#f5c84a;}
-.btn-ghost{background:transparent;color:var(--fog);border-color:var(--line);}
-.btn-ghost:hover:not(:disabled){background:var(--ink3);color:var(--paper);}
-.btn-danger{background:transparent;color:var(--ruby);border-color:rgba(240,96,96,.3);}
-.btn-danger:hover:not(:disabled){background:var(--rubyb);}
-.btn-sm{padding:5px 10px;font-size:10px;}
+    .sb-item .ico {
+      font-size: 14px;
+      width: 18px;
+      text-align: center;
+    }
 
-/* ─── ALERT BOX ──────────────────────────────────────── */
-.alert{
-  padding:10px 14px;border-radius:var(--r);
-  font-size:11px;border:1px solid;
-}
-.alert.r{background:var(--rubyb);border-color:rgba(240,96,96,.25);color:var(--ruby);}
-.alert.y{background:var(--goldd);border-color:var(--goldb);color:var(--gold);}
-.alert.g{background:var(--jadeb);border-color:rgba(62,207,142,.25);color:var(--jade);}
-.alert h4{font-size:11px;font-weight:600;margin-bottom:3px;}
-.alert p{color:var(--fog);font-size:10px;margin-top:2px;}
+    .sb-foot {
+      padding: 12px 16px;
+      border-top: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dust);
+    }
 
-/* ─── MODAL ──────────────────────────────────────────── */
-.modal-bg{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);
-  z-index:500;display:none;align-items:center;justify-content:center;
-  padding:24px;
-}
-.modal-bg.on{display:flex;}
-.modal{
-  background:var(--ink2);border:1px solid var(--line);
-  border-radius:var(--r);width:100%;max-width:620px;
-  max-height:90vh;overflow-y:auto;
-}
-.modal-h{
-  padding:14px 18px;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.modal-h h2{font-size:14px;font-weight:700;}
-.modal-close{
-  width:28px;height:28px;border-radius:50%;
-  border:1px solid var(--line);background:transparent;
-  color:var(--fog);cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;
-}
-.modal-close:hover{background:var(--rubyb);color:var(--ruby);}
-.modal-b{padding:18px;}
-.modal-foot{
-  padding:12px 18px;border-top:1px solid var(--line);
-  display:flex;justify-content:flex-end;gap:8px;
-}
+    /* ─── MAIN ─────────────────────────────────────────── */
+    .main {
+      margin-left: 220px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
 
-/* ─── EMPTY STATE ────────────────────────────────────── */
-.empty{
-  text-align:center;padding:40px 20px;
-  font-size:12px;color:var(--dust);font-family:var(--mono);
-}
-.empty .ico{font-size:32px;margin-bottom:8px;}
+    /* ─── TOPBAR ─────────────────────────────────────────── */
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--ink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      gap: 16px;
+    }
 
-/* ─── PIPELINE ───────────────────────────────────────── */
-.pipeline{display:flex;gap:0;overflow-x:auto;padding-bottom:4px;}
-.pipe-step{
-  flex:1;min-width:80px;padding:8px 10px 8px 20px;
-  position:relative;font-size:10px;
-  background:var(--ink3);border:1px solid var(--line);
-  border-right:none;cursor:pointer;
-  transition:background .15s;
-}
-.pipe-step:first-child{border-radius:var(--r) 0 0 var(--r);padding-left:12px;}
-.pipe-step:last-child{border-radius:0 var(--r) var(--r) 0;border-right:1px solid var(--line);}
-.pipe-step:hover{background:var(--ink2);}
-.pipe-step .pn{font-family:var(--mono);font-size:9px;color:var(--dust);}
-.pipe-step .pv{font-size:16px;font-family:var(--serif);font-style:italic;color:var(--paper);margin:2px 0;}
-.pipe-step.active-pipe{background:var(--goldd);border-color:var(--goldb);}
-.pipe-step.active-pipe .pn{color:var(--gold);}
+    .top-l h1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+    }
 
-/* ─── COT TABLE ──────────────────────────────────────── */
-.cot-src{
-  display:inline-flex;align-items:center;gap:5px;
-  font-family:var(--mono);font-size:9px;
-  padding:2px 7px;border-radius:3px;
-  background:var(--ink3);border:1px solid var(--line2);
-  color:var(--fog);
-}
+    .top-l p {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dust);
+      margin-top: 1px;
+    }
 
-/* ─── ANIMAÇÕES ──────────────────────────────────────── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-.page.on>*{animation:fadeUp .3s ease both;}
-.page.on>*:nth-child(2){animation-delay:.04s;}
-.page.on>*:nth-child(3){animation-delay:.08s;}
-.page.on>*:nth-child(4){animation-delay:.12s;}
-.page.on>*:nth-child(5){animation-delay:.16s;}
+    .top-r {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-/* ─── AJUSTES TEMA CLARO ─────────────────────────────── */
-[data-theme="light"] ::-webkit-scrollbar-thumb{background:var(--line2);}
-[data-theme="light"] .fselect option{background:var(--ink2);color:var(--paper);}
-[data-theme="light"] .pipe-step{background:var(--ink3);}
-[data-theme="light"] .pipe-step:hover{background:var(--line);}
-[data-theme="light"] .pipe-step.active-pipe{background:var(--goldd);}
-[data-theme="light"] .cot-src{background:var(--ink3);border-color:var(--line);}
-[data-theme="light"] .tbl tr:hover td{background:rgba(0,0,0,.03);}
-[data-theme="light"] .empty{color:var(--dust);}
-[data-theme="light"] .alert.y{background:rgba(234,179,8,.1);border-color:rgba(234,179,8,.3);color:#a16207;}
-[data-theme="light"] .alert.g{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#15803d;}
-[data-theme="light"] .alert.r{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#b91c1c;}
-</style>
+    /* ─── THEME TOGGLE ───────────────────────────────────── */
+    .theme-toggle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--ink2);
+      color: var(--fog);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      padding: 0;
+    }
+
+    .theme-toggle:hover {
+      background: var(--ink3);
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .theme-toggle .theme-icon {
+      line-height: 1;
+    }
+
+    [data-theme="light"] .theme-toggle {
+      background: var(--ink3);
+    }
+
+    [data-theme="light"] .theme-toggle:hover {
+      background: var(--line);
+    }
+
+    .badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+
+    .badge.g {
+      background: var(--jadeb);
+      color: var(--jade);
+      border-color: rgba(62, 207, 142, .3);
+    }
+
+    .badge.y {
+      background: var(--goldd);
+      color: var(--gold);
+      border-color: var(--goldb);
+    }
+
+    .badge.r {
+      background: var(--rubyb);
+      color: var(--ruby);
+      border-color: rgba(240, 96, 96, .25);
+    }
+
+    .badge.b {
+      background: var(--sapphb);
+      color: var(--sapph);
+      border-color: rgba(74, 158, 221, .25);
+    }
+
+    /* ─── PÁGINA ─────────────────────────────────────────── */
+    .page {
+      display: none;
+      padding: 24px;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .page.on {
+      display: flex;
+    }
+
+    /* ─── TOAST ─────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast-item {
+      padding: 10px 16px;
+      border-radius: var(--r);
+      font-size: 12px;
+      font-family: var(--mono);
+      border: 1px solid;
+      min-width: 220px;
+      animation: toastIn .25s ease;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .toast-item.ok {
+      background: var(--jadeb);
+      color: var(--jade);
+      border-color: rgba(62, 207, 142, .3);
+    }
+
+    .toast-item.err {
+      background: var(--rubyb);
+      color: var(--ruby);
+      border-color: rgba(240, 96, 96, .3);
+    }
+
+    .toast-item.info {
+      background: var(--sapphb);
+      color: var(--sapph);
+      border-color: rgba(74, 158, 221, .3);
+    }
+
+    /* ─── LOADER ─────────────────────────────────────────── */
+    .loader {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dust);
+      padding: 16px 0;
+    }
+
+    .spin {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      border-top-color: var(--gold);
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ─── CARDS ─────────────────────────────────────────── */
+    .card {
+      background: var(--ink2);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+
+    .card-h {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-h .ct {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .card-h .cs {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dust);
+    }
+
+    .card-b {
+      padding: 16px;
+    }
+
+    /* ─── METRICS ─────────────────────────────────────────── */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    @media(max-width:900px) {
+      .metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .mc {
+      background: var(--ink2);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mc::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+    }
+
+    .mc.g::after {
+      background: var(--jade);
+    }
+
+    .mc.y::after {
+      background: var(--gold);
+    }
+
+    .mc.r::after {
+      background: var(--ruby);
+    }
+
+    .mc.b::after {
+      background: var(--sapph);
+    }
+
+    .mc.a::after {
+      background: var(--amber);
+    }
+
+    .mc .lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dust);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .mc .val {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-style: italic;
+      margin: 4px 0 2px;
+      line-height: 1;
+    }
+
+    .mc .sub {
+      font-size: 10px;
+      color: var(--fog);
+    }
+
+    /* ─── GRID ─────────────────────────────────────────── */
+    .g2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .g3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media(max-width:900px) {
+
+      .g2,
+      .g3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ─── TABELA ─────────────────────────────────────────── */
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tbl th {
+      font-family: var(--mono);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--dust);
+      padding: 0 0 8px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .tbl td {
+      font-size: 11px;
+      padding: 9px 8px 9px 0;
+      border-bottom: 1px solid var(--line2);
+      vertical-align: middle;
+    }
+
+    .tbl tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tbl tr:hover td {
+      background: rgba(255, 255, 255, .02);
+    }
+
+    .mono {
+      font-family: var(--mono);
+      color: var(--fog);
+    }
+
+    .dim {
+      color: var(--fog);
+    }
+
+    .num-g {
+      font-family: var(--mono);
+      color: var(--jade);
+    }
+
+    .num-r {
+      font-family: var(--mono);
+      color: var(--ruby);
+    }
+
+    .num-y {
+      font-family: var(--mono);
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ─── FASE BADGE ─────────────────────────────────────── */
+    .fase {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 3px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .fase.DFD {
+      background: rgba(74, 158, 221, .1);
+      color: var(--sapph);
+      border-color: rgba(74, 158, 221, .25);
+    }
+
+    .fase.ETP {
+      background: rgba(232, 184, 74, .1);
+      color: var(--gold);
+      border-color: var(--goldb);
+    }
+
+    .fase.TR {
+      background: rgba(232, 146, 58, .1);
+      color: var(--amber);
+      border-color: rgba(232, 146, 58, .25);
+    }
+
+    .fase.EDITAL {
+      background: rgba(160, 100, 220, .1);
+      color: #b070f0;
+      border-color: rgba(160, 100, 220, .25);
+    }
+
+    .fase.LICITACAO {
+      background: rgba(62, 207, 142, .1);
+      color: var(--jade);
+      border-color: rgba(62, 207, 142, .25);
+    }
+
+    .fase.CONTRATO {
+      background: rgba(62, 207, 142, .15);
+      color: var(--jade);
+      border-color: rgba(62, 207, 142, .4);
+    }
+
+    .fase.EXECUCAO {
+      background: rgba(62, 207, 142, .2);
+      color: #2ef09e;
+      border-color: rgba(62, 207, 142, .5);
+    }
+
+    .fase.ENCERRADO {
+      background: rgba(74, 96, 112, .15);
+      color: var(--dust);
+      border-color: var(--line);
+    }
+
+    /* ─── PRIORIDADE ─────────────────────────────────────── */
+    .prio {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .prio.critica {
+      background: var(--ruby);
+      box-shadow: 0 0 6px var(--ruby);
+    }
+
+    .prio.alta {
+      background: var(--gold);
+    }
+
+    .prio.normal {
+      background: var(--sapph);
+    }
+
+    .prio.baixa {
+      background: var(--dust);
+    }
+
+    /* ─── STATUS CHECK ───────────────────────────────────── */
+    .chk {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+    }
+
+    .chk .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .chk.ok .dot {
+      background: var(--jade);
+    }
+
+    .chk.pendente .dot {
+      background: var(--sapph);
+    }
+
+    .chk.alerta .dot {
+      background: var(--gold);
+    }
+
+    .chk.bloqueante .dot {
+      background: var(--ruby);
+      box-shadow: 0 0 5px var(--ruby);
+    }
+
+    /* ─── PRAZO COUNTDOWN ────────────────────────────────── */
+    .countdown {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 3px;
+    }
+
+    .countdown.critico {
+      background: var(--rubyb);
+      color: var(--ruby);
+      border: 1px solid rgba(240, 96, 96, .3);
+    }
+
+    .countdown.atencao {
+      background: var(--goldd);
+      color: var(--gold);
+      border: 1px solid var(--goldb);
+    }
+
+    .countdown.ok {
+      background: var(--jadeb);
+      color: var(--jade);
+      border: 1px solid rgba(62, 207, 142, .3);
+    }
+
+    .countdown.vencido {
+      background: rgba(100, 30, 30, .3);
+      color: #f08080;
+      border: 1px solid rgba(200, 60, 60, .3);
+    }
+
+    /* ─── FORMS ──────────────────────────────────────────── */
+    .fgroup {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .flabel {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--fog);
+      letter-spacing: .3px;
+    }
+
+    .finput,
+    .fselect,
+    .ftextarea {
+      background: var(--ink3);
+      border: 1px solid var(--line);
+      color: var(--paper);
+      border-radius: var(--r);
+      padding: 8px 12px;
+      font-size: 12px;
+      font-family: var(--sans);
+      transition: border-color .15s;
+      width: 100%;
+    }
+
+    .finput:focus,
+    .fselect:focus,
+    .ftextarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .ftextarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.5;
+    }
+
+    .fselect option {
+      background: var(--ink2);
+    }
+
+    .frow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .frow3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--r);
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--sans);
+      cursor: pointer;
+      transition: all .15s;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #f5c84a;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--fog);
+      border-color: var(--line);
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--ink3);
+      color: var(--paper);
+    }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--ruby);
+      border-color: rgba(240, 96, 96, .3);
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: var(--rubyb);
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 10px;
+    }
+
+    /* ─── ALERT BOX ──────────────────────────────────────── */
+    .alert {
+      padding: 10px 14px;
+      border-radius: var(--r);
+      font-size: 11px;
+      border: 1px solid;
+    }
+
+    .alert.r {
+      background: var(--rubyb);
+      border-color: rgba(240, 96, 96, .25);
+      color: var(--ruby);
+    }
+
+    .alert.y {
+      background: var(--goldd);
+      border-color: var(--goldb);
+      color: var(--gold);
+    }
+
+    .alert.g {
+      background: var(--jadeb);
+      border-color: rgba(62, 207, 142, .25);
+      color: var(--jade);
+    }
+
+    .alert h4 {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .alert p {
+      color: var(--fog);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    /* ─── MODAL ──────────────────────────────────────────── */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .7);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-bg.on {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--ink2);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-h {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-h h2 {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--fog);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: var(--rubyb);
+      color: var(--ruby);
+    }
+
+    .modal-b {
+      padding: 18px;
+    }
+
+    .modal-foot {
+      padding: 12px 18px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* ─── EMPTY STATE ────────────────────────────────────── */
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 12px;
+      color: var(--dust);
+      font-family: var(--mono);
+    }
+
+    .empty .ico {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    /* ─── PIPELINE ───────────────────────────────────────── */
+    .pipeline {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .pipe-step {
+      flex: 1;
+      min-width: 80px;
+      padding: 8px 10px 8px 20px;
+      position: relative;
+      font-size: 10px;
+      background: var(--ink3);
+      border: 1px solid var(--line);
+      border-right: none;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    .pipe-step:first-child {
+      border-radius: var(--r) 0 0 var(--r);
+      padding-left: 12px;
+    }
+
+    .pipe-step:last-child {
+      border-radius: 0 var(--r) var(--r) 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .pipe-step:hover {
+      background: var(--ink2);
+    }
+
+    .pipe-step .pn {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dust);
+    }
+
+    .pipe-step .pv {
+      font-size: 16px;
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--paper);
+      margin: 2px 0;
+    }
+
+    .pipe-step.active-pipe {
+      background: var(--goldd);
+      border-color: var(--goldb);
+    }
+
+    .pipe-step.active-pipe .pn {
+      color: var(--gold);
+    }
+
+    /* ─── COT TABLE ──────────────────────────────────────── */
+    .cot-src {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--ink3);
+      border: 1px solid var(--line2);
+      color: var(--fog);
+    }
+
+    /* ─── ANIMAÇÕES ──────────────────────────────────────── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page.on>* {
+      animation: fadeUp .3s ease both;
+    }
+
+    .page.on>*:nth-child(2) {
+      animation-delay: .04s;
+    }
+
+    .page.on>*:nth-child(3) {
+      animation-delay: .08s;
+    }
+
+    .page.on>*:nth-child(4) {
+      animation-delay: .12s;
+    }
+
+    .page.on>*:nth-child(5) {
+      animation-delay: .16s;
+    }
+
+    /* ─── AJUSTES TEMA CLARO ─────────────────────────────── */
+    [data-theme="light"] ::-webkit-scrollbar-thumb {
+      background: var(--line2);
+    }
+
+    [data-theme="light"] .fselect option {
+      background: var(--ink2);
+      color: var(--paper);
+    }
+
+    [data-theme="light"] .pipe-step {
+      background: var(--ink3);
+    }
+
+    [data-theme="light"] .pipe-step:hover {
+      background: var(--line);
+    }
+
+    [data-theme="light"] .pipe-step.active-pipe {
+      background: var(--goldd);
+    }
+
+    [data-theme="light"] .cot-src {
+      background: var(--ink3);
+      border-color: var(--line);
+    }
+
+    [data-theme="light"] .tbl tr:hover td {
+      background: rgba(0, 0, 0, .03);
+    }
+
+    [data-theme="light"] .empty {
+      color: var(--dust);
+    }
+
+    [data-theme="light"] .alert.y {
+      background: rgba(234, 179, 8, .1);
+      border-color: rgba(234, 179, 8, .3);
+      color: #a16207;
+    }
+
+    [data-theme="light"] .alert.g {
+      background: rgba(34, 197, 94, .1);
+      border-color: rgba(34, 197, 94, .3);
+      color: #15803d;
+    }
+
+    [data-theme="light"] .alert.r {
+      background: rgba(239, 68, 68, .1);
+      border-color: rgba(239, 68, 68, .3);
+      color: #b91c1c;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ── TOAST ──────────────────────────────────────────── -->
-<div id="toast"></div>
+  <!-- ── TOAST ──────────────────────────────────────────── -->
+  <div id="toast"></div>
 
-<!-- ── MODAL PROCESSO ─────────────────────────────────── -->
-<div class="modal-bg" id="modal-proc">
-  <div class="modal">
-    <div class="modal-h">
-      <h2 id="modal-proc-title">Novo Processo</h2>
-      <button class="modal-close" data-close="modal-proc">×</button>
-    </div>
-    <div class="modal-b">
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">Número do Processo *</label>
-          <input class="finput" id="f-numero" placeholder="ex: 045/2026">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Ano *</label>
-          <input class="finput" id="f-ano" type="number" value="2026">
-        </div>
+  <!-- ── MODAL PROCESSO ─────────────────────────────────── -->
+  <div class="modal-bg" id="modal-proc">
+    <div class="modal">
+      <div class="modal-h">
+        <h2 id="modal-proc-title">Novo Processo</h2>
+        <button class="modal-close" data-close="modal-proc">×</button>
       </div>
-      <div class="fgroup">
-        <label class="flabel">Objeto *</label>
-        <input class="finput" id="f-objeto" placeholder="Descrição do objeto a contratar">
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">Secretaria *</label>
-          <select class="fselect" id="f-secretaria">
-            <option value="">Selecione</option>
-            <option>Administração</option>
-            <option>Educação</option>
-            <option>Saúde</option>
-            <option>Esporte</option>
-            <option>Assistência Social</option>
-            <option>Cultura</option>
-            <option>Obras</option>
-            <option>Finanças</option>
-            <option>Jurídico</option>
-          </select>
+      <div class="modal-b">
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">Número do Processo *</label>
+            <input class="finput" id="f-numero" placeholder="ex: 045/2026">
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Ano *</label>
+            <input class="finput" id="f-ano" type="number" value="2026">
+          </div>
         </div>
         <div class="fgroup">
-          <label class="flabel">Modalidade</label>
-          <select class="fselect" id="f-modalidade">
-            <option value="">A definir</option>
-            <option>Pregão Eletrônico</option>
-            <option>Compra Direta</option>
-            <option>Concorrência</option>
-            <option>Dispensa</option>
-            <option>Inexigibilidade</option>
-          </select>
+          <label class="flabel">Objeto *</label>
+          <input class="finput" id="f-objeto" placeholder="Descrição do objeto a contratar">
         </div>
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">Fase Atual *</label>
-          <select class="fselect" id="f-fase">
-            <option value="DFD">DFD</option>
-            <option value="ETP">ETP</option>
-            <option value="TR">TR</option>
-            <option value="EDITAL">Edital</option>
-            <option value="LICITACAO">Licitação</option>
-            <option value="CONTRATO">Contrato</option>
-            <option value="EXECUCAO">Execução</option>
-            <option value="ENCERRADO">Encerrado</option>
-          </select>
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">Secretaria *</label>
+            <select class="fselect" id="f-secretaria">
+              <option value="">Selecione</option>
+              <option>Administração</option>
+              <option>Educação</option>
+              <option>Saúde</option>
+              <option>Esporte</option>
+              <option>Assistência Social</option>
+              <option>Cultura</option>
+              <option>Obras</option>
+              <option>Finanças</option>
+              <option>Jurídico</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Modalidade</label>
+            <select class="fselect" id="f-modalidade">
+              <option value="">A definir</option>
+              <option>Pregão Eletrônico</option>
+              <option>Compra Direta</option>
+              <option>Concorrência</option>
+              <option>Dispensa</option>
+              <option>Inexigibilidade</option>
+            </select>
+          </div>
         </div>
-        <div class="fgroup">
-          <label class="flabel">Prioridade</label>
-          <select class="fselect" id="f-prioridade">
-            <option value="normal">Normal</option>
-            <option value="alta">Alta</option>
-            <option value="critica">Crítica</option>
-            <option value="baixa">Baixa</option>
-          </select>
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">Fase Atual *</label>
+            <select class="fselect" id="f-fase">
+              <option value="DFD">DFD</option>
+              <option value="ETP">ETP</option>
+              <option value="TR">TR</option>
+              <option value="EDITAL">Edital</option>
+              <option value="LICITACAO">Licitação</option>
+              <option value="CONTRATO">Contrato</option>
+              <option value="EXECUCAO">Execução</option>
+              <option value="ENCERRADO">Encerrado</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Prioridade</label>
+            <select class="fselect" id="f-prioridade">
+              <option value="normal">Normal</option>
+              <option value="alta">Alta</option>
+              <option value="critica">Crítica</option>
+              <option value="baixa">Baixa</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">Valor Estimado (R$)</label>
-          <input class="finput" id="f-valor" type="number" placeholder="0,00">
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">Valor Estimado (R$)</label>
+            <input class="finput" id="f-valor" type="number" placeholder="0,00">
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Prazo Crítico (data)</label>
+            <input class="finput" id="f-prazo-data" type="date">
+          </div>
         </div>
-        <div class="fgroup">
-          <label class="flabel">Prazo Crítico (data)</label>
-          <input class="finput" id="f-prazo-data" type="date">
+        <div class="fgroup" id="f-prazo-desc-wrap" style="display:none;">
+          <label class="flabel">Descrição do Prazo</label>
+          <input class="finput" id="f-prazo-desc" placeholder="ex: Etapa 1 obrigatória — Portaria MTE 765/2025">
         </div>
-      </div>
-      <div class="fgroup" id="f-prazo-desc-wrap" style="display:none;">
-        <label class="flabel">Descrição do Prazo</label>
-        <input class="finput" id="f-prazo-desc" placeholder="ex: Etapa 1 obrigatória — Portaria MTE 765/2025">
-      </div>
-      <div class="fgroup" id="f-prazo-legal-wrap" style="display:none;">
-        <label class="flabel">Base Legal do Prazo</label>
-        <input class="finput" id="f-prazo-legal" placeholder="ex: Portaria MTE 765/2025">
-      </div>
-      <div class="fgroup">
-        <label class="flabel">Observações</label>
-        <textarea class="ftextarea" id="f-obs" placeholder="Signatários, pendências, notas..."></textarea>
-      </div>
-      <input type="hidden" id="f-edit-id">
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" data-close="modal-proc">Cancelar</button>
-      <button class="btn btn-primary" id="btn-salvar-proc">Salvar Processo</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── MODAL COTAÇÃO ───────────────────────────────────── -->
-<div class="modal-bg" id="modal-cot">
-  <div class="modal">
-    <div class="modal-h">
-      <h2>Adicionar Cotação</h2>
-      <button class="modal-close" data-close="modal-cot">×</button>
-    </div>
-    <div class="modal-b">
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">Nº do Item *</label>
-          <input class="finput" id="c-item-num" type="number" min="1" value="1">
+        <div class="fgroup" id="f-prazo-legal-wrap" style="display:none;">
+          <label class="flabel">Base Legal do Prazo</label>
+          <input class="finput" id="f-prazo-legal" placeholder="ex: Portaria MTE 765/2025">
         </div>
         <div class="fgroup">
-          <label class="flabel">Quantidade *</label>
-          <input class="finput" id="c-qtd" type="number" placeholder="ex: 150">
+          <label class="flabel">Observações</label>
+          <textarea class="ftextarea" id="f-obs" placeholder="Signatários, pendências, notas..."></textarea>
         </div>
+        <input type="hidden" id="f-edit-id">
       </div>
-      <div class="fgroup">
-        <label class="flabel">Descrição do Item *</label>
-        <input class="finput" id="c-desc" placeholder="ex: Ovo de Páscoa Soja Sem Lactose">
+      <div class="modal-foot">
+        <button class="btn btn-ghost" data-close="modal-proc">Cancelar</button>
+        <button class="btn btn-primary" id="btn-salvar-proc">Salvar Processo</button>
       </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">Unidade</label>
-          <input class="finput" id="c-und" placeholder="Un., m², kg, litro...">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Fonte da Cotação *</label>
-          <input class="finput" id="c-fonte" placeholder="ex: BBMNET, Município de Campinas">
-        </div>
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">CNPJ da Fonte</label>
-          <input class="finput" id="c-cnpj" placeholder="Opcional">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Valor Unitário (R$) *</label>
-          <input class="finput" id="c-valor" type="number" step="0.01" placeholder="0,00">
-        </div>
-      </div>
-      <div class="fgroup">
-        <label class="flabel">Base Legal</label>
-        <select class="fselect" id="c-base">
-          <option value="Art. 5º Inc. I">Art. 5º Inc. I — Banco de Preços</option>
-          <option value="Art. 54 Inc. I">Art. 54 Inc. I — Plataformas (Dec. 2979/2024)</option>
-          <option value="Art. 54 Inc. II">Art. 54 Inc. II — Municípios SP (Dec. 2979/2024)</option>
-        </select>
-      </div>
-      <input type="hidden" id="c-proc-id">
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" data-close="modal-cot">Cancelar</button>
-      <button class="btn btn-primary" id="btn-salvar-cot">Adicionar Cotação</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── MODAL CHECKLIST ─────────────────────────────────── -->
-<div class="modal-bg" id="modal-chk">
-  <div class="modal" style="max-width:480px;">
-    <div class="modal-h">
-      <h2>Adicionar Item ao Checklist</h2>
-      <button class="modal-close" data-close="modal-chk">×</button>
-    </div>
-    <div class="modal-b">
-      <div class="fgroup">
-        <label class="flabel">Ponto de Controle *</label>
-        <input class="finput" id="chk-item" placeholder="ex: Fiscal designado por portaria">
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label class="flabel">Status *</label>
-          <select class="fselect" id="chk-status">
-            <option value="pendente">Pendente</option>
-            <option value="ok">Concluído ✓</option>
-            <option value="alerta">Alerta ⚠</option>
-            <option value="bloqueante">Bloqueante 🔴</option>
-          </select>
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Referência / Cláusula</label>
-          <input class="finput" id="chk-ref" placeholder="ex: TR cláusula 6.1">
-        </div>
-      </div>
-      <input type="hidden" id="chk-proc-id">
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost" data-close="modal-chk">Cancelar</button>
-      <button class="btn btn-primary" id="btn-salvar-chk">Adicionar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── SIDEBAR ─────────────────────────────────────────── -->
-<aside class="sb">
-  <div class="sb-logo">
-    <div class="brand">ComprasGov</div>
-    <div class="sub">Prefeitura de Boituva · SP</div>
-  </div>
-  <nav class="sb-nav">
-    <div class="sb-grp">Geral</div>
-    <div class="sb-item on" data-nav="dash"><span class="ico">▦</span> Dashboard</div>
-    <div class="sb-grp">Processos</div>
-    <div class="sb-item" data-nav="processos"><span class="ico">◈</span> Todos os Processos</div>
-    <div class="sb-item" data-nav="cotacoes"><span class="ico">≋</span> Pesquisa de Preços</div>
-    <div class="sb-grp">Controle</div>
-    <div class="sb-item" data-nav="fiscalizacao"><span class="ico">⚑</span> Fiscalização</div>
-    <div class="sb-item" data-nav="prazos"><span class="ico">◷</span> Prazos & Alertas</div>
-  </nav>
-  <div class="sb-foot">Lei 14.133/2021<br>Dec. 2979/2024</div>
-</aside>
-
-<!-- ── MAIN ────────────────────────────────────────────── -->
-<div class="main">
-  <div class="top">
-    <div class="top-l">
-      <h1 id="top-title">Dashboard</h1>
-      <p id="top-sub">Prefeitura de Boituva · Exercício 2026</p>
-    </div>
-    <div class="top-r">
-      <span class="badge r" id="badge-alertas">— alertas</span>
-      <span class="badge y" id="badge-prazos">— prazos</span>
-      <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
-        <span class="theme-icon">☀</span>
-      </button>
-      <span class="badge g">Supabase ✓</span>
     </div>
   </div>
 
-  <!-- ═══════════════ DASHBOARD ═════════════════════════ -->
-  <div class="page on" id="page-dash">
-    <div class="metrics" id="dash-metrics">
-      <div class="loader"><div class="spin"></div>Carregando...</div>
-    </div>
-    <div class="g2">
-      <div class="card">
-        <div class="card-h">
-          <span class="ct">Pipeline de Processos</span>
-          <span class="cs">Quantidade por fase</span>
+  <!-- ── MODAL COTAÇÃO ───────────────────────────────────── -->
+  <div class="modal-bg" id="modal-cot">
+    <div class="modal">
+      <div class="modal-h">
+        <h2>Adicionar Cotação</h2>
+        <button class="modal-close" data-close="modal-cot">×</button>
+      </div>
+      <div class="modal-b">
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">Nº do Item *</label>
+            <input class="finput" id="c-item-num" type="number" min="1" value="1">
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Quantidade *</label>
+            <input class="finput" id="c-qtd" type="number" placeholder="ex: 150">
+          </div>
         </div>
-        <div class="card-b">
-          <div class="pipeline" id="dash-pipeline">
-            <div class="loader"><div class="spin"></div>Carregando...</div>
+        <div class="fgroup">
+          <label class="flabel">Descrição do Item *</label>
+          <input class="finput" id="c-desc" placeholder="ex: Ovo de Páscoa Soja Sem Lactose">
+        </div>
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">Unidade</label>
+            <input class="finput" id="c-und" placeholder="Un., m², kg, litro...">
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Fonte da Cotação *</label>
+            <input class="finput" id="c-fonte" placeholder="ex: BBMNET, Município de Campinas">
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">CNPJ da Fonte</label>
+            <input class="finput" id="c-cnpj" placeholder="Opcional">
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Valor Unitário (R$) *</label>
+            <input class="finput" id="c-valor" type="number" step="0.01" placeholder="0,00">
+          </div>
+        </div>
+        <div class="fgroup">
+          <label class="flabel">Base Legal</label>
+          <select class="fselect" id="c-base">
+            <option value="Art. 5º Inc. I">Art. 5º Inc. I — Banco de Preços</option>
+            <option value="Art. 54 Inc. I">Art. 54 Inc. I — Plataformas (Dec. 2979/2024)</option>
+            <option value="Art. 54 Inc. II">Art. 54 Inc. II — Municípios SP (Dec. 2979/2024)</option>
+          </select>
+        </div>
+        <input type="hidden" id="c-proc-id">
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" data-close="modal-cot">Cancelar</button>
+        <button class="btn btn-primary" id="btn-salvar-cot">Adicionar Cotação</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MODAL CHECKLIST ─────────────────────────────────── -->
+  <div class="modal-bg" id="modal-chk">
+    <div class="modal" style="max-width:480px;">
+      <div class="modal-h">
+        <h2>Adicionar Item ao Checklist</h2>
+        <button class="modal-close" data-close="modal-chk">×</button>
+      </div>
+      <div class="modal-b">
+        <div class="fgroup">
+          <label class="flabel">Ponto de Controle *</label>
+          <input class="finput" id="chk-item" placeholder="ex: Fiscal designado por portaria">
+        </div>
+        <div class="frow">
+          <div class="fgroup">
+            <label class="flabel">Status *</label>
+            <select class="fselect" id="chk-status">
+              <option value="pendente">Pendente</option>
+              <option value="ok">Concluído ✓</option>
+              <option value="alerta">Alerta ⚠</option>
+              <option value="bloqueante">Bloqueante 🔴</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Referência / Cláusula</label>
+            <input class="finput" id="chk-ref" placeholder="ex: TR cláusula 6.1">
+          </div>
+        </div>
+        <input type="hidden" id="chk-proc-id">
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" data-close="modal-chk">Cancelar</button>
+        <button class="btn btn-primary" id="btn-salvar-chk">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SIDEBAR ─────────────────────────────────────────── -->
+  <aside class="sb">
+    <div class="sb-logo">
+      <div class="brand">ComprasGov</div>
+      <div class="sub">Prefeitura de Boituva · SP</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-grp">Geral</div>
+      <div class="sb-item on" data-nav="dash"><span class="ico">▦</span> Dashboard</div>
+      <div class="sb-grp">Processos</div>
+      <div class="sb-item" data-nav="processos"><span class="ico">◈</span> Todos os Processos</div>
+      <div class="sb-item" data-nav="cotacoes"><span class="ico">≋</span> Pesquisa de Preços</div>
+      <div class="sb-grp">Controle</div>
+      <div class="sb-item" data-nav="fiscalizacao"><span class="ico">⚑</span> Fiscalização</div>
+      <div class="sb-item" data-nav="prazos"><span class="ico">◷</span> Prazos & Alertas</div>
+    </nav>
+    <div class="sb-foot">Lei 14.133/2021<br>Dec. 2979/2024</div>
+  </aside>
+
+  <!-- ── MAIN ────────────────────────────────────────────── -->
+  <div class="main">
+    <div class="top">
+      <div class="top-l">
+        <h1 id="top-title">Dashboard</h1>
+        <p id="top-sub">Prefeitura de Boituva · Exercício 2026</p>
+      </div>
+      <div class="top-r">
+        <span class="badge r" id="badge-alertas">— alertas</span>
+        <span class="badge y" id="badge-prazos">— prazos</span>
+        <button class="theme-toggle" id="theme-toggle" title="Alternar tema">
+          <span class="theme-icon">☀</span>
+        </button>
+        <span class="badge g">Supabase ✓</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════ DASHBOARD ═════════════════════════ -->
+    <div class="page on" id="page-dash">
+      <div class="metrics" id="dash-metrics">
+        <div class="loader">
+          <div class="spin"></div>Carregando...
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-h">
+            <span class="ct">Pipeline de Processos</span>
+            <span class="cs">Quantidade por fase</span>
+          </div>
+          <div class="card-b">
+            <div class="pipeline" id="dash-pipeline">
+              <div class="loader">
+                <div class="spin"></div>Carregando...
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h">
+            <span class="ct">Prazos Críticos</span>
+            <span class="cs">Próximos 90 dias</span>
+          </div>
+          <div class="card-b" id="dash-prazos">
+            <div class="loader">
+              <div class="spin"></div>
+            </div>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-h">
-          <span class="ct">Prazos Críticos</span>
-          <span class="cs">Próximos 90 dias</span>
+          <span class="ct">Processos Recentes</span>
+          <span class="cs">Ordenados por atualização</span>
         </div>
-        <div class="card-b" id="dash-prazos">
-          <div class="loader"><div class="spin"></div></div>
+        <div class="card-b" id="dash-recentes">
+          <div class="loader">
+            <div class="spin"></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-h">
-        <span class="ct">Processos Recentes</span>
-        <span class="cs">Ordenados por atualização</span>
-      </div>
-      <div class="card-b" id="dash-recentes">
-        <div class="loader"><div class="spin"></div></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══════════════ PROCESSOS ════════════════════════ -->
-  <div class="page" id="page-processos">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;" id="filtro-fase">
-        <button class="btn btn-ghost btn-sm fase-filter on" data-fase="">Todos</button>
-        <button class="btn btn-ghost btn-sm fase-filter" data-fase="DFD">DFD</button>
-        <button class="btn btn-ghost btn-sm fase-filter" data-fase="ETP">ETP</button>
-        <button class="btn btn-ghost btn-sm fase-filter" data-fase="TR">TR</button>
-        <button class="btn btn-ghost btn-sm fase-filter" data-fase="EDITAL">Edital</button>
-        <button class="btn btn-ghost btn-sm fase-filter" data-fase="LICITACAO">Licitação</button>
-        <button class="btn btn-ghost btn-sm fase-filter" data-fase="CONTRATO">Contrato</button>
-        <button class="btn btn-ghost btn-sm fase-filter" data-fase="EXECUCAO">Execução</button>
+    <!-- ═══════════════ PROCESSOS ════════════════════════ -->
+    <div class="page" id="page-processos">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="filtro-fase">
+          <button class="btn btn-ghost btn-sm fase-filter on" data-fase="">Todos</button>
+          <button class="btn btn-ghost btn-sm fase-filter" data-fase="DFD">DFD</button>
+          <button class="btn btn-ghost btn-sm fase-filter" data-fase="ETP">ETP</button>
+          <button class="btn btn-ghost btn-sm fase-filter" data-fase="TR">TR</button>
+          <button class="btn btn-ghost btn-sm fase-filter" data-fase="EDITAL">Edital</button>
+          <button class="btn btn-ghost btn-sm fase-filter" data-fase="LICITACAO">Licitação</button>
+          <button class="btn btn-ghost btn-sm fase-filter" data-fase="CONTRATO">Contrato</button>
+          <button class="btn btn-ghost btn-sm fase-filter" data-fase="EXECUCAO">Execução</button>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btn-novo-proc">+ Novo Processo</button>
       </div>
-      <button class="btn btn-primary btn-sm" id="btn-novo-proc">+ Novo Processo</button>
-    </div>
-    <div class="card">
-      <div class="card-b" id="lista-processos">
-        <div class="loader"><div class="spin"></div>Carregando...</div>
+      <div class="card">
+        <div class="card-b" id="lista-processos">
+          <div class="loader">
+            <div class="spin"></div>Carregando...
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- ═══════════════ COTAÇÕES ═════════════════════════ -->
-  <div class="page" id="page-cotacoes">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <div>
-        <label class="flabel" style="display:block;margin-bottom:4px;">Processo</label>
-        <select class="fselect" id="cot-proc-select" style="width:320px;max-width:100%;">
-          <option value="">Selecione um processo...</option>
-        </select>
+    <!-- ═══════════════ COTAÇÕES ═════════════════════════ -->
+    <div class="page" id="page-cotacoes">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>
+          <label class="flabel" style="display:block;margin-bottom:4px;">Processo</label>
+          <select class="fselect" id="cot-proc-select" style="width:320px;max-width:100%;">
+            <option value="">Selecione um processo...</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btn-nova-cot" disabled>+ Adicionar Cotação</button>
       </div>
-      <button class="btn btn-primary btn-sm" id="btn-nova-cot" disabled>+ Adicionar Cotação</button>
-    </div>
 
-    <div class="card" id="cot-resumo" style="display:none;">
-      <div class="card-h"><span class="ct">Resultado da Pesquisa de Preços</span><span class="cs">Estatísticas calculadas automaticamente</span></div>
-      <div class="card-b" id="cot-stats"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-h"><span class="ct">Cotações Lançadas</span></div>
-      <div class="card-b" id="lista-cotacoes">
-        <div class="empty"><div class="ico">≋</div>Selecione um processo para ver as cotações</div>
+      <div class="card" id="cot-resumo" style="display:none;">
+        <div class="card-h"><span class="ct">Resultado da Pesquisa de Preços</span><span class="cs">Estatísticas
+            calculadas automaticamente</span></div>
+        <div class="card-b" id="cot-stats"></div>
       </div>
-    </div>
-  </div>
 
-  <!-- ═══════════════ FISCALIZAÇÃO ═════════════════════ -->
-  <div class="page" id="page-fiscalizacao">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <div>
-        <label class="flabel" style="display:block;margin-bottom:4px;">Processo</label>
-        <select class="fselect" id="fisc-proc-select" style="width:320px;max-width:100%;">
-          <option value="">Selecione um processo...</option>
-        </select>
-      </div>
-      <button class="btn btn-primary btn-sm" id="btn-novo-chk" disabled>+ Adicionar Item</button>
-    </div>
-    <div class="card">
-      <div class="card-b" id="lista-checklist">
-        <div class="empty"><div class="ico">⚑</div>Selecione um processo para ver o checklist de fiscalização</div>
+      <div class="card">
+        <div class="card-h"><span class="ct">Cotações Lançadas</span></div>
+        <div class="card-b" id="lista-cotacoes">
+          <div class="empty">
+            <div class="ico">≋</div>Selecione um processo para ver as cotações
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- ═══════════════ PRAZOS ═══════════════════════════ -->
-  <div class="page" id="page-prazos">
-    <div class="card">
-      <div class="card-h">
-        <span class="ct">Todos os Prazos Cadastrados</span>
-        <span class="cs">Ordenados por data limite</span>
+    <!-- ═══════════════ FISCALIZAÇÃO ═════════════════════ -->
+    <div class="page" id="page-fiscalizacao">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>
+          <label class="flabel" style="display:block;margin-bottom:4px;">Processo</label>
+          <select class="fselect" id="fisc-proc-select" style="width:320px;max-width:100%;">
+            <option value="">Selecione um processo...</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btn-novo-chk" disabled>+ Adicionar Item</button>
       </div>
-      <div class="card-b" id="lista-prazos">
-        <div class="loader"><div class="spin"></div>Carregando...</div>
+      <div class="card">
+        <div class="card-b" id="lista-checklist">
+          <div class="empty">
+            <div class="ico">⚑</div>Selecione um processo para ver o checklist de fiscalização
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-</div><!-- /main -->
+    <!-- ═══════════════ PRAZOS ═══════════════════════════ -->
+    <div class="page" id="page-prazos">
+      <div class="card">
+        <div class="card-h">
+          <span class="ct">Todos os Prazos Cadastrados</span>
+          <span class="cs">Ordenados por data limite</span>
+        </div>
+        <div class="card-b" id="lista-prazos">
+          <div class="loader">
+            <div class="spin"></div>Carregando...
+          </div>
+        </div>
+      </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="js/config.js"></script>
-<script>
-/* ═══════════════════════════════════════════════════════
-   APLICAÇÃO COMPRASGOV - BOITUVA
-   ═══════════════════════════════════════════════════════ */
+  </div><!-- /main -->
 
-// Inicializa cliente Supabase com configuração externa
-const { createClient } = supabase;
-let db;
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       APLICAÇÃO COMPRASGOV - BOITUVA
+       ═══════════════════════════════════════════════════════ */
 
-function initSupabase() {
-  if (typeof SUPABASE_CONFIG === 'undefined') {
-    console.error('SUPABASE_CONFIG não encontrado. Verifique se js/config.js está carregado.');
-    return false;
-  }
-  
-  if (SUPABASE_CONFIG.URL === 'COLE_SUA_SUPABASE_URL_AQUI' || 
-      SUPABASE_CONFIG.ANON_KEY === 'COLE_SUA_ANON_KEY_AQUI') {
-    return false;
-  }
-  
-  try {
-    db = createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
-    return true;
-  } catch (err) {
-    console.error('Erro ao criar cliente Supabase:', err);
-    return false;
-  }
-}
+    // Inicializa cliente Supabase com configuração externa
+    const { createClient } = supabase;
+    let db;
 
-/* ─── NAV ─────────────────────────────────────────────── */
-const PAGES = {
-  dash:          { el: 'page-dash',          title: 'Dashboard',              sub: 'Visão geral · Exercício 2026' },
-  processos:     { el: 'page-processos',     title: 'Processos Administrativos', sub: 'Cadastro e acompanhamento' },
-  cotacoes:      { el: 'page-cotacoes',      title: 'Pesquisa de Preços',     sub: 'Cotações · Estatísticas automáticas' },
-  fiscalizacao:  { el: 'page-fiscalizacao',  title: 'Fiscalização',           sub: 'Checklists por processo' },
-  prazos:        { el: 'page-prazos',        title: 'Prazos & Alertas',       sub: 'Contagem regressiva de deadlines' },
-};
-let currentPage = 'dash';
+    function initSupabase() {
+      if (typeof SUPABASE_CONFIG === 'undefined') {
+        console.error('SUPABASE_CONFIG não encontrado. Verifique se js/config.js está carregado.');
+        return false;
+      }
 
-function nav(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('on'));
-  document.getElementById(PAGES[id].el).classList.add('on');
-  document.querySelectorAll('.sb-item').forEach(i => {
-    if (i.dataset.nav === id) i.classList.add('on');
-  });
-  document.getElementById('top-title').textContent = PAGES[id].title;
-  document.getElementById('top-sub').textContent   = PAGES[id].sub;
-  document.querySelector('.main').scrollTo(0, 0);
-  currentPage = id;
-  if (id === 'dash')         loadDash();
-  if (id === 'processos')    loadProcessos();
-  if (id === 'cotacoes')     initCotacoes();
-  if (id === 'fiscalizacao') initFiscalizacao();
-  if (id === 'prazos')       loadPrazos();
-}
+      if (SUPABASE_CONFIG.URL === 'COLE_SUA_SUPABASE_URL_AQUI' ||
+        SUPABASE_CONFIG.ANON_KEY === 'COLE_SUA_ANON_KEY_AQUI') {
+        return false;
+      }
 
-/* ─── TOAST ───────────────────────────────────────────── */
-function toast(msg, type = 'info') {
-  const t = document.getElementById('toast');
-  const d = document.createElement('div');
-  d.className = `toast-item ${type}`;
-  d.textContent = msg;
-  t.appendChild(d);
-  setTimeout(() => d.remove(), 3500);
-}
-
-/* ─── UTILS ───────────────────────────────────────────── */
-const fmt = v => v != null ? `R$ ${Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2})}` : '—';
-const fmtDate = d => d ? new Date(d + 'T00:00:00').toLocaleDateString('pt-BR') : '—';
-function diasAte(dateStr) {
-  const hoje = new Date(); hoje.setHours(0,0,0,0);
-  const alvo = new Date(dateStr + 'T00:00:00');
-  return Math.round((alvo - hoje) / 86400000);
-}
-function countdownClass(dias) {
-  if (dias < 0)  return 'vencido';
-  if (dias <= 14) return 'critico';
-  if (dias <= 45) return 'atencao';
-  return 'ok';
-}
-function countdownLabel(dias) {
-  if (dias < 0)  return `venceu há ${Math.abs(dias)} dias`;
-  if (dias === 0) return 'HOJE';
-  return `${dias} dias`;
-}
-
-/* ─── MODAL ───────────────────────────────────────────── */
-function openModal(id) { document.getElementById(id).classList.add('on'); }
-function closeModal(id) { document.getElementById(id).classList.remove('on'); }
-
-/* ─── WATCH PRAZO INPUT ───────────────────────────────── */
-function bindPrazoInput() {
-  document.getElementById('f-prazo-data').addEventListener('input', function() {
-    const show = !!this.value;
-    document.getElementById('f-prazo-desc-wrap').style.display  = show ? '' : 'none';
-    document.getElementById('f-prazo-legal-wrap').style.display = show ? '' : 'none';
-  });
-}
-
-/* ══════════════════════════════════════════════════════
-   DASHBOARD
-══════════════════════════════════════════════════════ */
-async function loadDash() {
-  if (!db) return;
-  
-  try {
-    const [{ data: procs, error: errProcs }, { data: prazosData, error: errPrazos }] = await Promise.all([
-      db.from('processos').select('*').order('atualizado_em', { ascending: false }),
-      db.from('prazos').select('*, processos(numero, objeto)').eq('concluido', false).order('data_limite')
-    ]);
-    
-    if (errProcs) {
-      toast('Erro ao carregar processos: ' + errProcs.message, 'err');
-      return;
+      try {
+        db = createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+        return true;
+      } catch (err) {
+        console.error('Erro ao criar cliente Supabase:', err);
+        return false;
+      }
     }
-    
-    if (!procs) return;
 
-  // Métricas
-  const total    = procs.length;
-  const criticos = procs.filter(p => p.prioridade === 'critica').length;
-  const prazosUrgentes = (prazosData || []).filter(p => diasAte(p.data_limite) <= 45).length;
-  const valorTotal = procs.reduce((s, p) => s + (p.valor_estimado || 0), 0);
+    /* ─── NAV ─────────────────────────────────────────────── */
+    const PAGES = {
+      dash: { el: 'page-dash', title: 'Dashboard', sub: 'Visão geral · Exercício 2026' },
+      processos: { el: 'page-processos', title: 'Processos Administrativos', sub: 'Cadastro e acompanhamento' },
+      cotacoes: { el: 'page-cotacoes', title: 'Pesquisa de Preços', sub: 'Cotações · Estatísticas automáticas' },
+      fiscalizacao: { el: 'page-fiscalizacao', title: 'Fiscalização', sub: 'Checklists por processo' },
+      prazos: { el: 'page-prazos', title: 'Prazos & Alertas', sub: 'Contagem regressiva de deadlines' },
+    };
+    let currentPage = 'dash';
 
-  document.getElementById('dash-metrics').innerHTML = `
+    function nav(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+      document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('on'));
+      document.getElementById(PAGES[id].el).classList.add('on');
+      document.querySelectorAll('.sb-item').forEach(i => {
+        if (i.dataset.nav === id) i.classList.add('on');
+      });
+      document.getElementById('top-title').textContent = PAGES[id].title;
+      document.getElementById('top-sub').textContent = PAGES[id].sub;
+      document.querySelector('.main').scrollTo(0, 0);
+      currentPage = id;
+      if (id === 'dash') loadDash();
+      if (id === 'processos') loadProcessos();
+      if (id === 'cotacoes') initCotacoes();
+      if (id === 'fiscalizacao') initFiscalizacao();
+      if (id === 'prazos') loadPrazos();
+    }
+
+    /* ─── TOAST ───────────────────────────────────────────── */
+    function toast(msg, type = 'info') {
+      const t = document.getElementById('toast');
+      const d = document.createElement('div');
+      d.className = `toast-item ${type}`;
+      d.textContent = msg;
+      t.appendChild(d);
+      setTimeout(() => d.remove(), 3500);
+    }
+
+    /* ─── UTILS ───────────────────────────────────────────── */
+    const fmt = v => v != null ? `R$ ${Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '—';
+    const fmtDate = d => d ? new Date(d + 'T00:00:00').toLocaleDateString('pt-BR') : '—';
+    function diasAte(dateStr) {
+      const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+      const alvo = new Date(dateStr + 'T00:00:00');
+      return Math.round((alvo - hoje) / 86400000);
+    }
+    function countdownClass(dias) {
+      if (dias < 0) return 'vencido';
+      if (dias <= 14) return 'critico';
+      if (dias <= 45) return 'atencao';
+      return 'ok';
+    }
+    function countdownLabel(dias) {
+      if (dias < 0) return `venceu há ${Math.abs(dias)} dias`;
+      if (dias === 0) return 'HOJE';
+      return `${dias} dias`;
+    }
+
+    /* ─── MODAL ───────────────────────────────────────────── */
+    function openModal(id) { document.getElementById(id).classList.add('on'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('on'); }
+
+    /* ─── WATCH PRAZO INPUT ───────────────────────────────── */
+    function bindPrazoInput() {
+      document.getElementById('f-prazo-data').addEventListener('input', function () {
+        const show = !!this.value;
+        document.getElementById('f-prazo-desc-wrap').style.display = show ? '' : 'none';
+        document.getElementById('f-prazo-legal-wrap').style.display = show ? '' : 'none';
+      });
+    }
+
+    /* ══════════════════════════════════════════════════════
+       DASHBOARD
+    ══════════════════════════════════════════════════════ */
+    async function loadDash() {
+      if (!db) return;
+
+      try {
+        const [{ data: procs, error: errProcs }, { data: prazosData, error: errPrazos }] = await Promise.all([
+          db.from('processos').select('*').order('atualizado_em', { ascending: false }),
+          db.from('prazos').select('*, processos(numero, objeto)').eq('concluido', false).order('data_limite')
+        ]);
+
+        if (errProcs) {
+          toast('Erro ao carregar processos: ' + errProcs.message, 'err');
+          return;
+        }
+
+        if (!procs) return;
+
+        // Métricas
+        const total = procs.length;
+        const criticos = procs.filter(p => p.prioridade === 'critica').length;
+        const prazosUrgentes = (prazosData || []).filter(p => diasAte(p.data_limite) <= 45).length;
+        const valorTotal = procs.reduce((s, p) => s + (p.valor_estimado || 0), 0);
+
+        document.getElementById('dash-metrics').innerHTML = `
     <div class="mc b"><div class="lbl">Processos</div><div class="val">${total}</div><div class="sub">ativos no sistema</div></div>
     <div class="mc r"><div class="lbl">Prioridade Crítica</div><div class="val">${criticos}</div><div class="sub">requerem atenção imediata</div></div>
     <div class="mc y"><div class="lbl">Prazos Urgentes</div><div class="val">${prazosUrgentes}</div><div class="sub">próximos 45 dias</div></div>
     <div class="mc g"><div class="lbl">Valor Estimado Total</div><div class="val" style="font-size:20px;">${valorTotal > 0 ? fmt(valorTotal) : '—'}</div><div class="sub">soma processos cadastrados</div></div>
   `;
 
-  // Badge topbar
-  document.getElementById('badge-alertas').textContent = `${criticos} crítico${criticos !== 1 ? 's' : ''}`;
-  document.getElementById('badge-prazos').textContent  = `${prazosUrgentes} prazo${prazosUrgentes !== 1 ? 's' : ''} urgente${prazosUrgentes !== 1 ? 's' : ''}`;
+        // Badge topbar
+        document.getElementById('badge-alertas').textContent = `${criticos} crítico${criticos !== 1 ? 's' : ''}`;
+        document.getElementById('badge-prazos').textContent = `${prazosUrgentes} prazo${prazosUrgentes !== 1 ? 's' : ''} urgente${prazosUrgentes !== 1 ? 's' : ''}`;
 
-  // Pipeline
-  const fases = ['DFD','ETP','TR','EDITAL','LICITACAO','CONTRATO','EXECUCAO'];
-  const counts = {};
-  fases.forEach(f => counts[f] = 0);
-  procs.forEach(p => { if (counts[p.fase] !== undefined) counts[p.fase]++; });
-  document.getElementById('dash-pipeline').innerHTML = fases.map(f => `
+        // Pipeline
+        const fases = ['DFD', 'ETP', 'TR', 'EDITAL', 'LICITACAO', 'CONTRATO', 'EXECUCAO'];
+        const counts = {};
+        fases.forEach(f => counts[f] = 0);
+        procs.forEach(p => { if (counts[p.fase] !== undefined) counts[p.fase]++; });
+        document.getElementById('dash-pipeline').innerHTML = fases.map(f => `
     <div class="pipe-step${counts[f] > 0 ? ' active-pipe' : ''}" onclick="nav('processos')">
       <div class="pn">${f}</div>
       <div class="pv">${counts[f]}</div>
     </div>
   `).join('');
 
-  // Prazos
-  if (!prazosData?.length) {
-    document.getElementById('dash-prazos').innerHTML = '<div class="empty"><div class="ico">◷</div>Nenhum prazo cadastrado</div>';
-  } else {
-    document.getElementById('dash-prazos').innerHTML = prazosData.slice(0, 6).map(p => {
-      const dias = diasAte(p.data_limite);
-      return `
+        // Prazos
+        if (!prazosData?.length) {
+          document.getElementById('dash-prazos').innerHTML = '<div class="empty"><div class="ico">◷</div>Nenhum prazo cadastrado</div>';
+        } else {
+          document.getElementById('dash-prazos').innerHTML = prazosData.slice(0, 6).map(p => {
+            const dias = diasAte(p.data_limite);
+            return `
         <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line2);">
           <div>
             <div style="font-size:11px;font-weight:500;">${p.descricao}</div>
@@ -962,46 +1671,46 @@ async function loadDash() {
           <span class="countdown ${countdownClass(dias)}">${countdownLabel(dias)}</span>
         </div>
       `;
-    }).join('') + (prazosData.length > 6 ? `<div style="text-align:center;padding:8px 0;font-size:10px;color:var(--dust);cursor:pointer;" onclick="nav('prazos')">Ver todos (${prazosData.length}) →</div>` : '');
-  }
+          }).join('') + (prazosData.length > 6 ? `<div style="text-align:center;padding:8px 0;font-size:10px;color:var(--dust);cursor:pointer;" onclick="nav('prazos')">Ver todos (${prazosData.length}) →</div>` : '');
+        }
 
-    // Recentes
-    renderTabelaProcessos(procs.slice(0, 8), 'dash-recentes');
-    
-  } catch (err) {
-    toast('Erro no dashboard: ' + err.message, 'err');
-  }
-}
+        // Recentes
+        renderTabelaProcessos(procs.slice(0, 8), 'dash-recentes');
 
-/* ══════════════════════════════════════════════════════
-   PROCESSOS
-══════════════════════════════════════════════════════ */
-
-async function loadProcessos() {
-  if (!db) return;
-  
-  try {
-    let q = db.from('processos').select('*').order('atualizado_em', { ascending: false });
-    if (faseFilter) q = q.eq('fase', faseFilter);
-    const { data, error } = await q;
-    
-    if (error) { 
-      toast('Erro ao carregar processos', 'err'); 
-      return; 
+      } catch (err) {
+        toast('Erro no dashboard: ' + err.message, 'err');
+      }
     }
-    renderTabelaProcessos(data || [], 'lista-processos');
-  } catch (err) {
-    toast('Erro de conexão', 'err');
-  }
-}
 
-function renderTabelaProcessos(procs, containerId) {
-  const el = document.getElementById(containerId);
-  if (!procs.length) {
-    el.innerHTML = '<div class="empty"><div class="ico">◈</div>Nenhum processo encontrado</div>';
-    return;
-  }
-  el.innerHTML = `
+    /* ══════════════════════════════════════════════════════
+       PROCESSOS
+    ══════════════════════════════════════════════════════ */
+
+    async function loadProcessos() {
+      if (!db) return;
+
+      try {
+        let q = db.from('processos').select('*').order('atualizado_em', { ascending: false });
+        if (faseFilter) q = q.eq('fase', faseFilter);
+        const { data, error } = await q;
+
+        if (error) {
+          toast('Erro ao carregar processos', 'err');
+          return;
+        }
+        renderTabelaProcessos(data || [], 'lista-processos');
+      } catch (err) {
+        toast('Erro de conexão', 'err');
+      }
+    }
+
+    function renderTabelaProcessos(procs, containerId) {
+      const el = document.getElementById(containerId);
+      if (!procs.length) {
+        el.innerHTML = '<div class="empty"><div class="ico">◈</div>Nenhum processo encontrado</div>';
+        return;
+      }
+      el.innerHTML = `
     <table class="tbl">
       <thead><tr>
         <th></th><th>Processo</th><th>Objeto</th>
@@ -1014,7 +1723,7 @@ function renderTabelaProcessos(procs, containerId) {
             <td class="mono" style="white-space:nowrap;">${p.numero}</td>
             <td style="max-width:280px;">
               <div style="font-size:11px;font-weight:500;">${p.objeto}</div>
-              ${p.observacoes ? `<div style="font-size:10px;color:var(--dust);">${p.observacoes.substring(0,80)}${p.observacoes.length > 80 ? '…' : ''}</div>` : ''}
+              ${p.observacoes ? `<div style="font-size:10px;color:var(--dust);">${p.observacoes.substring(0, 80)}${p.observacoes.length > 80 ? '…' : ''}</div>` : ''}
             </td>
             <td class="dim" style="font-size:10px;white-space:nowrap;">${p.secretaria}</td>
             <td><span class="fase ${p.fase}">${p.fase}</span></td>
@@ -1030,163 +1739,163 @@ function renderTabelaProcessos(procs, containerId) {
       </tbody>
     </table>
   `;
-}
+    }
 
-function abrirModalNovoProcesso() {
-  document.getElementById('f-edit-id').value = '';
-  document.getElementById('modal-proc-title').textContent = 'Novo Processo';
-  ['f-numero','f-objeto','f-obs','f-prazo-desc','f-prazo-legal'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('f-ano').value = new Date().getFullYear();
-  document.getElementById('f-fase').value = 'DFD';
-  document.getElementById('f-prioridade').value = 'normal';
-  document.getElementById('f-valor').value = '';
-  document.getElementById('f-prazo-data').value = '';
-  document.getElementById('f-prazo-desc-wrap').style.display = 'none';
-  document.getElementById('f-prazo-legal-wrap').style.display = 'none';
-  openModal('modal-proc');
-}
+    function abrirModalNovoProcesso() {
+      document.getElementById('f-edit-id').value = '';
+      document.getElementById('modal-proc-title').textContent = 'Novo Processo';
+      ['f-numero', 'f-objeto', 'f-obs', 'f-prazo-desc', 'f-prazo-legal'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f-ano').value = new Date().getFullYear();
+      document.getElementById('f-fase').value = 'DFD';
+      document.getElementById('f-prioridade').value = 'normal';
+      document.getElementById('f-valor').value = '';
+      document.getElementById('f-prazo-data').value = '';
+      document.getElementById('f-prazo-desc-wrap').style.display = 'none';
+      document.getElementById('f-prazo-legal-wrap').style.display = 'none';
+      openModal('modal-proc');
+    }
 
-async function abrirModalEditarProcesso(id) {
-  if (!db) return;
-  
-  const { data: p } = await db.from('processos').select('*').eq('id', id).single();
-  if (!p) return;
-  document.getElementById('f-edit-id').value  = p.id;
-  document.getElementById('modal-proc-title').textContent = `Editar — ${p.numero}`;
-  document.getElementById('f-numero').value      = p.numero;
-  document.getElementById('f-ano').value         = p.ano;
-  document.getElementById('f-objeto').value      = p.objeto;
-  document.getElementById('f-secretaria').value  = p.secretaria;
-  document.getElementById('f-modalidade').value  = p.modalidade || '';
-  document.getElementById('f-fase').value        = p.fase;
-  document.getElementById('f-prioridade').value  = p.prioridade || 'normal';
-  document.getElementById('f-valor').value       = p.valor_estimado || '';
-  document.getElementById('f-obs').value         = p.observacoes || '';
-  openModal('modal-proc');
-}
+    async function abrirModalEditarProcesso(id) {
+      if (!db) return;
 
-async function salvarProcesso() {
-  if (!db) return;
-  
-  const btn = document.getElementById('btn-salvar-proc');
-  const numero    = document.getElementById('f-numero').value.trim();
-  const objeto    = document.getElementById('f-objeto').value.trim();
-  const secretaria = document.getElementById('f-secretaria').value;
-  if (!numero || !objeto || !secretaria) { toast('Preencha os campos obrigatórios', 'err'); return; }
+      const { data: p } = await db.from('processos').select('*').eq('id', id).single();
+      if (!p) return;
+      document.getElementById('f-edit-id').value = p.id;
+      document.getElementById('modal-proc-title').textContent = `Editar — ${p.numero}`;
+      document.getElementById('f-numero').value = p.numero;
+      document.getElementById('f-ano').value = p.ano;
+      document.getElementById('f-objeto').value = p.objeto;
+      document.getElementById('f-secretaria').value = p.secretaria;
+      document.getElementById('f-modalidade').value = p.modalidade || '';
+      document.getElementById('f-fase').value = p.fase;
+      document.getElementById('f-prioridade').value = p.prioridade || 'normal';
+      document.getElementById('f-valor').value = p.valor_estimado || '';
+      document.getElementById('f-obs').value = p.observacoes || '';
+      openModal('modal-proc');
+    }
 
-  btn.disabled = true; btn.textContent = 'Salvando…';
+    async function salvarProcesso() {
+      if (!db) return;
 
-  const payload = {
-    numero,
-    ano:         parseInt(document.getElementById('f-ano').value),
-    objeto,
-    secretaria,
-    modalidade:  document.getElementById('f-modalidade').value || null,
-    fase:        document.getElementById('f-fase').value,
-    prioridade:  document.getElementById('f-prioridade').value,
-    valor_estimado: parseFloat(document.getElementById('f-valor').value) || null,
-    observacoes: document.getElementById('f-obs').value.trim() || null,
-  };
+      const btn = document.getElementById('btn-salvar-proc');
+      const numero = document.getElementById('f-numero').value.trim();
+      const objeto = document.getElementById('f-objeto').value.trim();
+      const secretaria = document.getElementById('f-secretaria').value;
+      if (!numero || !objeto || !secretaria) { toast('Preencha os campos obrigatórios', 'err'); return; }
 
-  const editId = document.getElementById('f-edit-id').value;
-  let procId;
+      btn.disabled = true; btn.textContent = 'Salvando…';
 
-  if (editId) {
-    const { error } = await db.from('processos').update(payload).eq('id', editId);
-    if (error) { toast('Erro ao atualizar: ' + error.message, 'err'); btn.disabled = false; btn.textContent = 'Salvar Processo'; return; }
-    procId = editId;
-    toast('Processo atualizado ✓', 'ok');
-  } else {
-    const { data, error } = await db.from('processos').insert(payload).select().single();
-    if (error) { toast('Erro ao salvar: ' + error.message, 'err'); btn.disabled = false; btn.textContent = 'Salvar Processo'; return; }
-    procId = data.id;
-    // Prazo opcional
-    const prazoData  = document.getElementById('f-prazo-data').value;
-    const prazoDesc  = document.getElementById('f-prazo-desc').value.trim();
-    const prazoLegal = document.getElementById('f-prazo-legal').value.trim();
-    if (prazoData) {
-      await db.from('prazos').insert({
-        processo_id: procId,
-        descricao:   prazoDesc || 'Prazo definido no cadastro',
-        data_limite: prazoData,
-        base_legal:  prazoLegal || null,
+      const payload = {
+        numero,
+        ano: parseInt(document.getElementById('f-ano').value),
+        objeto,
+        secretaria,
+        modalidade: document.getElementById('f-modalidade').value || null,
+        fase: document.getElementById('f-fase').value,
+        prioridade: document.getElementById('f-prioridade').value,
+        valor_estimado: parseFloat(document.getElementById('f-valor').value) || null,
+        observacoes: document.getElementById('f-obs').value.trim() || null,
+      };
+
+      const editId = document.getElementById('f-edit-id').value;
+      let procId;
+
+      if (editId) {
+        const { error } = await db.from('processos').update(payload).eq('id', editId);
+        if (error) { toast('Erro ao atualizar: ' + error.message, 'err'); btn.disabled = false; btn.textContent = 'Salvar Processo'; return; }
+        procId = editId;
+        toast('Processo atualizado ✓', 'ok');
+      } else {
+        const { data, error } = await db.from('processos').insert(payload).select().single();
+        if (error) { toast('Erro ao salvar: ' + error.message, 'err'); btn.disabled = false; btn.textContent = 'Salvar Processo'; return; }
+        procId = data.id;
+        // Prazo opcional
+        const prazoData = document.getElementById('f-prazo-data').value;
+        const prazoDesc = document.getElementById('f-prazo-desc').value.trim();
+        const prazoLegal = document.getElementById('f-prazo-legal').value.trim();
+        if (prazoData) {
+          await db.from('prazos').insert({
+            processo_id: procId,
+            descricao: prazoDesc || 'Prazo definido no cadastro',
+            data_limite: prazoData,
+            base_legal: prazoLegal || null,
+          });
+        }
+        toast('Processo cadastrado ✓', 'ok');
+      }
+
+      btn.disabled = false; btn.textContent = 'Salvar Processo';
+      closeModal('modal-proc');
+      loadProcessos();
+      loadDash();
+    }
+
+    const FASES = ['DFD', 'ETP', 'TR', 'EDITAL', 'LICITACAO', 'CONTRATO', 'EXECUCAO', 'ENCERRADO'];
+    async function avancarFase(id, faseAtual) {
+      if (!db) return;
+
+      const idx = FASES.indexOf(faseAtual);
+      if (idx >= FASES.length - 1) { toast('Processo já encerrado', 'info'); return; }
+      const nova = FASES[idx + 1];
+      if (!confirm(`Avançar para fase "${nova}"?`)) return;
+      await db.from('processos').update({ fase: nova }).eq('id', id);
+      await db.from('historico').insert({ processo_id: id, fase_anterior: faseAtual, fase_nova: nova, descricao: `Avançado para ${nova}` });
+      toast(`Fase atualizada → ${nova}`, 'ok');
+      loadProcessos();
+    }
+
+    /* ══════════════════════════════════════════════════════
+       COTAÇÕES
+    ══════════════════════════════════════════════════════ */
+    async function initCotacoes() {
+      if (!db) return;
+
+      const { data } = await db.from('processos').select('id,numero,objeto').order('numero');
+      const sel = document.getElementById('cot-proc-select');
+      sel.innerHTML = '<option value="">Selecione um processo...</option>';
+      (data || []).forEach(p => {
+        const o = document.createElement('option');
+        o.value = p.id; o.textContent = `${p.numero} — ${p.objeto.substring(0, 50)}`;
+        sel.appendChild(o);
       });
     }
-    toast('Processo cadastrado ✓', 'ok');
-  }
 
-  btn.disabled = false; btn.textContent = 'Salvar Processo';
-  closeModal('modal-proc');
-  loadProcessos();
-  loadDash();
-}
+    async function loadCotacoes() {
+      if (!db) return;
 
-const FASES = ['DFD','ETP','TR','EDITAL','LICITACAO','CONTRATO','EXECUCAO','ENCERRADO'];
-async function avancarFase(id, faseAtual) {
-  if (!db) return;
-  
-  const idx = FASES.indexOf(faseAtual);
-  if (idx >= FASES.length - 1) { toast('Processo já encerrado', 'info'); return; }
-  const nova = FASES[idx + 1];
-  if (!confirm(`Avançar para fase "${nova}"?`)) return;
-  await db.from('processos').update({ fase: nova }).eq('id', id);
-  await db.from('historico').insert({ processo_id: id, fase_anterior: faseAtual, fase_nova: nova, descricao: `Avançado para ${nova}` });
-  toast(`Fase atualizada → ${nova}`, 'ok');
-  loadProcessos();
-}
+      const pid = document.getElementById('cot-proc-select').value;
+      document.getElementById('btn-nova-cot').disabled = !pid;
+      if (!pid) { document.getElementById('lista-cotacoes').innerHTML = '<div class="empty"><div class="ico">≋</div>Selecione um processo</div>'; document.getElementById('cot-resumo').style.display = 'none'; return; }
 
-/* ══════════════════════════════════════════════════════
-   COTAÇÕES
-══════════════════════════════════════════════════════ */
-async function initCotacoes() {
-  if (!db) return;
-  
-  const { data } = await db.from('processos').select('id,numero,objeto').order('numero');
-  const sel = document.getElementById('cot-proc-select');
-  sel.innerHTML = '<option value="">Selecione um processo...</option>';
-  (data || []).forEach(p => {
-    const o = document.createElement('option');
-    o.value = p.id; o.textContent = `${p.numero} — ${p.objeto.substring(0,50)}`;
-    sel.appendChild(o);
-  });
-}
+      const { data: cots } = await db.from('cotacoes').select('*').eq('processo_id', pid).order('item_numero').order('valor_unitario');
+      if (!cots?.length) {
+        document.getElementById('lista-cotacoes').innerHTML = '<div class="empty"><div class="ico">≋</div>Nenhuma cotação lançada para este processo</div>';
+        document.getElementById('cot-resumo').style.display = 'none';
+        return;
+      }
 
-async function loadCotacoes() {
-  if (!db) return;
-  
-  const pid = document.getElementById('cot-proc-select').value;
-  document.getElementById('btn-nova-cot').disabled = !pid;
-  if (!pid) { document.getElementById('lista-cotacoes').innerHTML = '<div class="empty"><div class="ico">≋</div>Selecione um processo</div>'; document.getElementById('cot-resumo').style.display = 'none'; return; }
+      // Agrupar por item
+      const itens = {};
+      cots.forEach(c => {
+        if (!itens[c.item_numero]) itens[c.item_numero] = { desc: c.item_descricao, unidade: c.unidade, quantidade: c.quantidade, vals: [] };
+        itens[c.item_numero].vals.push(c.valor_unitario);
+      });
 
-  const { data: cots } = await db.from('cotacoes').select('*').eq('processo_id', pid).order('item_numero').order('valor_unitario');
-  if (!cots?.length) {
-    document.getElementById('lista-cotacoes').innerHTML = '<div class="empty"><div class="ico">≋</div>Nenhuma cotação lançada para este processo</div>';
-    document.getElementById('cot-resumo').style.display = 'none';
-    return;
-  }
-
-  // Agrupar por item
-  const itens = {};
-  cots.forEach(c => {
-    if (!itens[c.item_numero]) itens[c.item_numero] = { desc: c.item_descricao, unidade: c.unidade, quantidade: c.quantidade, vals: [] };
-    itens[c.item_numero].vals.push(c.valor_unitario);
-  });
-
-  // Estatísticas por item
-  let statsHtml = '';
-  let totalGeral = 0;
-  Object.entries(itens).sort(([a],[b]) => a-b).forEach(([num, item]) => {
-    const v = item.vals.map(Number).sort((a,b) => a-b);
-    const n = v.length;
-    const min = v[0], max = v[n-1];
-    const media = v.reduce((s,x) => s+x, 0) / n;
-    const mediana = n % 2 === 0 ? (v[n/2-1] + v[n/2]) / 2 : v[Math.floor(n/2)];
-    const dp = Math.sqrt(v.reduce((s,x) => s + Math.pow(x - media, 2), 0) / n);
-    const cv = (dp / media * 100);
-    const total = media * (item.quantidade || 0);
-    totalGeral += total;
-    const cvClass = cv > 25 ? 'num-r' : cv > 15 ? 'num-y' : 'num-g';
-    statsHtml += `
+      // Estatísticas por item
+      let statsHtml = '';
+      let totalGeral = 0;
+      Object.entries(itens).sort(([a], [b]) => a - b).forEach(([num, item]) => {
+        const v = item.vals.map(Number).sort((a, b) => a - b);
+        const n = v.length;
+        const min = v[0], max = v[n - 1];
+        const media = v.reduce((s, x) => s + x, 0) / n;
+        const mediana = n % 2 === 0 ? (v[n / 2 - 1] + v[n / 2]) / 2 : v[Math.floor(n / 2)];
+        const dp = Math.sqrt(v.reduce((s, x) => s + Math.pow(x - media, 2), 0) / n);
+        const cv = (dp / media * 100);
+        const total = media * (item.quantidade || 0);
+        totalGeral += total;
+        const cvClass = cv > 25 ? 'num-r' : cv > 15 ? 'num-y' : 'num-g';
+        statsHtml += `
       <tr>
         <td class="mono">${num}</td>
         <td style="font-size:11px;">${item.desc}</td>
@@ -1201,10 +1910,10 @@ async function loadCotacoes() {
         <td class="num-y">${total > 0 ? fmt(total) : '—'}</td>
       </tr>
     `;
-  });
+      });
 
-  document.getElementById('cot-resumo').style.display = '';
-  document.getElementById('cot-stats').innerHTML = `
+      document.getElementById('cot-resumo').style.display = '';
+      document.getElementById('cot-stats').innerHTML = `
     <div style="overflow-x:auto;">
       <table class="tbl" style="min-width:750px;">
         <thead><tr>
@@ -1221,8 +1930,8 @@ async function loadCotacoes() {
     </div>` : ''}
   `;
 
-  // Tabela de cotações individuais
-  document.getElementById('lista-cotacoes').innerHTML = `
+      // Tabela de cotações individuais
+      document.getElementById('lista-cotacoes').innerHTML = `
     <div style="overflow-x:auto;">
       <table class="tbl">
         <thead><tr><th>Item</th><th>Descrição</th><th>Fonte</th><th>Base Legal</th><th>Valor Unit.</th><th></th></tr></thead>
@@ -1241,91 +1950,91 @@ async function loadCotacoes() {
       </table>
     </div>
   `;
-}
+    }
 
-function abrirModalCotacao() {
-  const pid = document.getElementById('cot-proc-select').value;
-  if (!pid) return;
-  document.getElementById('c-proc-id').value = pid;
-  ['c-desc','c-und','c-fonte','c-cnpj'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('c-item-num').value = 1;
-  document.getElementById('c-qtd').value = '';
-  document.getElementById('c-valor').value = '';
-  openModal('modal-cot');
-}
+    function abrirModalCotacao() {
+      const pid = document.getElementById('cot-proc-select').value;
+      if (!pid) return;
+      document.getElementById('c-proc-id').value = pid;
+      ['c-desc', 'c-und', 'c-fonte', 'c-cnpj'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('c-item-num').value = 1;
+      document.getElementById('c-qtd').value = '';
+      document.getElementById('c-valor').value = '';
+      openModal('modal-cot');
+    }
 
-async function salvarCotacao() {
-  if (!db) return;
-  
-  const pid   = document.getElementById('c-proc-id').value;
-  const num   = parseInt(document.getElementById('c-item-num').value);
-  const desc  = document.getElementById('c-desc').value.trim();
-  const valor = parseFloat(document.getElementById('c-valor').value);
-  const fonte = document.getElementById('c-fonte').value.trim();
-  if (!pid || !num || !desc || !valor || !fonte) { toast('Preencha todos os campos obrigatórios', 'err'); return; }
+    async function salvarCotacao() {
+      if (!db) return;
 
-  const { error } = await db.from('cotacoes').insert({
-    processo_id:  pid,
-    item_numero:  num,
-    item_descricao: desc,
-    unidade:      document.getElementById('c-und').value.trim() || null,
-    quantidade:   parseFloat(document.getElementById('c-qtd').value) || null,
-    fonte,
-    fonte_cnpj:   document.getElementById('c-cnpj').value.trim() || null,
-    valor_unitario: valor,
-    base_legal:   document.getElementById('c-base').value,
-  });
+      const pid = document.getElementById('c-proc-id').value;
+      const num = parseInt(document.getElementById('c-item-num').value);
+      const desc = document.getElementById('c-desc').value.trim();
+      const valor = parseFloat(document.getElementById('c-valor').value);
+      const fonte = document.getElementById('c-fonte').value.trim();
+      if (!pid || !num || !desc || !valor || !fonte) { toast('Preencha todos os campos obrigatórios', 'err'); return; }
 
-  if (error) { toast('Erro: ' + error.message, 'err'); return; }
-  toast('Cotação adicionada ✓', 'ok');
-  closeModal('modal-cot');
-  loadCotacoes();
-}
+      const { error } = await db.from('cotacoes').insert({
+        processo_id: pid,
+        item_numero: num,
+        item_descricao: desc,
+        unidade: document.getElementById('c-und').value.trim() || null,
+        quantidade: parseFloat(document.getElementById('c-qtd').value) || null,
+        fonte,
+        fonte_cnpj: document.getElementById('c-cnpj').value.trim() || null,
+        valor_unitario: valor,
+        base_legal: document.getElementById('c-base').value,
+      });
 
-async function deletarCotacao(id) {
-  if (!db) return;
-  
-  if (!confirm('Remover esta cotação?')) return;
-  await db.from('cotacoes').delete().eq('id', id);
-  toast('Cotação removida', 'info');
-  loadCotacoes();
-}
+      if (error) { toast('Erro: ' + error.message, 'err'); return; }
+      toast('Cotação adicionada ✓', 'ok');
+      closeModal('modal-cot');
+      loadCotacoes();
+    }
 
-/* ══════════════════════════════════════════════════════
-   FISCALIZAÇÃO
-══════════════════════════════════════════════════════ */
-async function initFiscalizacao() {
-  if (!db) return;
-  
-  const { data } = await db.from('processos').select('id,numero,objeto').order('numero');
-  const sel = document.getElementById('fisc-proc-select');
-  sel.innerHTML = '<option value="">Selecione um processo...</option>';
-  (data || []).forEach(p => {
-    const o = document.createElement('option');
-    o.value = p.id; o.textContent = `${p.numero} — ${p.objeto.substring(0,50)}`;
-    sel.appendChild(o);
-  });
-}
+    async function deletarCotacao(id) {
+      if (!db) return;
 
-async function loadChecklist() {
-  if (!db) return;
-  
-  const pid = document.getElementById('fisc-proc-select').value;
-  document.getElementById('btn-novo-chk').disabled = !pid;
-  if (!pid) { document.getElementById('lista-checklist').innerHTML = '<div class="empty"><div class="ico">⚑</div>Selecione um processo</div>'; return; }
+      if (!confirm('Remover esta cotação?')) return;
+      await db.from('cotacoes').delete().eq('id', id);
+      toast('Cotação removida', 'info');
+      loadCotacoes();
+    }
 
-  const { data: items } = await db.from('checklist_fiscalizacao').select('*').eq('processo_id', pid).order('criado_em');
-  if (!items?.length) {
-    document.getElementById('lista-checklist').innerHTML = '<div class="empty"><div class="ico">⚑</div>Nenhum item de checklist. Clique em "+ Adicionar Item" para começar.</div>';
-    return;
-  }
+    /* ══════════════════════════════════════════════════════
+       FISCALIZAÇÃO
+    ══════════════════════════════════════════════════════ */
+    async function initFiscalizacao() {
+      if (!db) return;
 
-  const counts = { ok: 0, pendente: 0, alerta: 0, bloqueante: 0 };
-  items.forEach(i => counts[i.status]++);
-  const total = items.length;
-  const pct = Math.round(counts.ok / total * 100);
+      const { data } = await db.from('processos').select('id,numero,objeto').order('numero');
+      const sel = document.getElementById('fisc-proc-select');
+      sel.innerHTML = '<option value="">Selecione um processo...</option>';
+      (data || []).forEach(p => {
+        const o = document.createElement('option');
+        o.value = p.id; o.textContent = `${p.numero} — ${p.objeto.substring(0, 50)}`;
+        sel.appendChild(o);
+      });
+    }
 
-  document.getElementById('lista-checklist').innerHTML = `
+    async function loadChecklist() {
+      if (!db) return;
+
+      const pid = document.getElementById('fisc-proc-select').value;
+      document.getElementById('btn-novo-chk').disabled = !pid;
+      if (!pid) { document.getElementById('lista-checklist').innerHTML = '<div class="empty"><div class="ico">⚑</div>Selecione um processo</div>'; return; }
+
+      const { data: items } = await db.from('checklist_fiscalizacao').select('*').eq('processo_id', pid).order('criado_em');
+      if (!items?.length) {
+        document.getElementById('lista-checklist').innerHTML = '<div class="empty"><div class="ico">⚑</div>Nenhum item de checklist. Clique em "+ Adicionar Item" para começar.</div>';
+        return;
+      }
+
+      const counts = { ok: 0, pendente: 0, alerta: 0, bloqueante: 0 };
+      items.forEach(i => counts[i.status]++);
+      const total = items.length;
+      const pct = Math.round(counts.ok / total * 100);
+
+      document.getElementById('lista-checklist').innerHTML = `
     <div style="margin-bottom:14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
         <span style="font-size:11px;color:var(--fog);">${counts.ok} de ${total} itens concluídos</span>
@@ -1349,10 +2058,10 @@ async function loadChecklist() {
             <td>
               <select class="fselect" style="width:110px;font-size:10px;padding:3px 6px;" 
                 onchange="updateCheckStatus('${i.id}', this.value)">
-                <option value="pendente"  ${i.status==='pendente'  ? 'selected':''}>⬜ Pendente</option>
-                <option value="ok"        ${i.status==='ok'        ? 'selected':''}>✅ Concluído</option>
-                <option value="alerta"    ${i.status==='alerta'    ? 'selected':''}>⚠ Alerta</option>
-                <option value="bloqueante"${i.status==='bloqueante'? 'selected':''}>🔴 Bloqueante</option>
+                <option value="pendente"  ${i.status === 'pendente' ? 'selected' : ''}>⬜ Pendente</option>
+                <option value="ok"        ${i.status === 'ok' ? 'selected' : ''}>✅ Concluído</option>
+                <option value="alerta"    ${i.status === 'alerta' ? 'selected' : ''}>⚠ Alerta</option>
+                <option value="bloqueante"${i.status === 'bloqueante' ? 'selected' : ''}>🔴 Bloqueante</option>
               </select>
             </td>
             <td style="font-size:11px;">${i.item}</td>
@@ -1363,73 +2072,73 @@ async function loadChecklist() {
       </tbody>
     </table>
   `;
-}
+    }
 
-function abrirModalChecklist() {
-  const pid = document.getElementById('fisc-proc-select').value;
-  if (!pid) return;
-  document.getElementById('chk-proc-id').value = pid;
-  document.getElementById('chk-item').value = '';
-  document.getElementById('chk-ref').value = '';
-  document.getElementById('chk-status').value = 'pendente';
-  openModal('modal-chk');
-}
+    function abrirModalChecklist() {
+      const pid = document.getElementById('fisc-proc-select').value;
+      if (!pid) return;
+      document.getElementById('chk-proc-id').value = pid;
+      document.getElementById('chk-item').value = '';
+      document.getElementById('chk-ref').value = '';
+      document.getElementById('chk-status').value = 'pendente';
+      openModal('modal-chk');
+    }
 
-async function salvarChecklist() {
-  if (!db) return;
-  
-  const pid  = document.getElementById('chk-proc-id').value;
-  const item = document.getElementById('chk-item').value.trim();
-  if (!pid || !item) { toast('Preencha o ponto de controle', 'err'); return; }
+    async function salvarChecklist() {
+      if (!db) return;
 
-  const { error } = await db.from('checklist_fiscalizacao').insert({
-    processo_id: pid,
-    item,
-    status:     document.getElementById('chk-status').value,
-    referencia: document.getElementById('chk-ref').value.trim() || null,
-  });
+      const pid = document.getElementById('chk-proc-id').value;
+      const item = document.getElementById('chk-item').value.trim();
+      if (!pid || !item) { toast('Preencha o ponto de controle', 'err'); return; }
 
-  if (error) { toast('Erro: ' + error.message, 'err'); return; }
-  toast('Item adicionado ✓', 'ok');
-  closeModal('modal-chk');
-  loadChecklist();
-}
+      const { error } = await db.from('checklist_fiscalizacao').insert({
+        processo_id: pid,
+        item,
+        status: document.getElementById('chk-status').value,
+        referencia: document.getElementById('chk-ref').value.trim() || null,
+      });
 
-async function updateCheckStatus(id, status) {
-  if (!db) return;
-  
-  await db.from('checklist_fiscalizacao').update({ status }).eq('id', id);
-  toast('Status atualizado ✓', 'ok');
-  // Re-render apenas os badges sem recarregar tudo
-  loadChecklist();
-}
+      if (error) { toast('Erro: ' + error.message, 'err'); return; }
+      toast('Item adicionado ✓', 'ok');
+      closeModal('modal-chk');
+      loadChecklist();
+    }
 
-async function deletarChecklist(id) {
-  if (!db) return;
-  
-  if (!confirm('Remover este item?')) return;
-  await db.from('checklist_fiscalizacao').delete().eq('id', id);
-  toast('Item removido', 'info');
-  loadChecklist();
-}
+    async function updateCheckStatus(id, status) {
+      if (!db) return;
 
-/* ══════════════════════════════════════════════════════
-   PRAZOS
-══════════════════════════════════════════════════════ */
-async function loadPrazos() {
-  if (!db) return;
-  
-  const { data } = await db.from('prazos')
-    .select('*, processos(numero, objeto, secretaria)')
-    .order('data_limite');
+      await db.from('checklist_fiscalizacao').update({ status }).eq('id', id);
+      toast('Status atualizado ✓', 'ok');
+      // Re-render apenas os badges sem recarregar tudo
+      loadChecklist();
+    }
 
-  const el = document.getElementById('lista-prazos');
-  if (!data?.length) {
-    el.innerHTML = '<div class="empty"><div class="ico">◷</div>Nenhum prazo cadastrado. Adicione prazos ao criar processos.</div>';
-    return;
-  }
+    async function deletarChecklist(id) {
+      if (!db) return;
 
-  el.innerHTML = `
+      if (!confirm('Remover este item?')) return;
+      await db.from('checklist_fiscalizacao').delete().eq('id', id);
+      toast('Item removido', 'info');
+      loadChecklist();
+    }
+
+    /* ══════════════════════════════════════════════════════
+       PRAZOS
+    ══════════════════════════════════════════════════════ */
+    async function loadPrazos() {
+      if (!db) return;
+
+      const { data } = await db.from('prazos')
+        .select('*, processos(numero, objeto, secretaria)')
+        .order('data_limite');
+
+      const el = document.getElementById('lista-prazos');
+      if (!data?.length) {
+        el.innerHTML = '<div class="empty"><div class="ico">◷</div>Nenhum prazo cadastrado. Adicione prazos ao criar processos.</div>';
+        return;
+      }
+
+      el.innerHTML = `
     <table class="tbl">
       <thead><tr>
         <th>Prazo</th><th>Descrição</th><th>Processo</th>
@@ -1437,8 +2146,8 @@ async function loadPrazos() {
       </tr></thead>
       <tbody>
         ${data.map(p => {
-          const dias = diasAte(p.data_limite);
-          return `
+        const dias = diasAte(p.data_limite);
+        return `
             <tr style="${p.concluido ? 'opacity:.4;' : ''}">
               <td class="mono" style="white-space:nowrap;">${fmtDate(p.data_limite)}</td>
               <td style="font-size:11px;">${p.descricao}</td>
@@ -1447,100 +2156,100 @@ async function loadPrazos() {
               <td class="mono" style="font-size:9px;color:var(--dust);">${p.base_legal || '—'}</td>
               <td>
                 ${p.concluido
-                  ? '<span class="badge g">Concluído</span>'
-                  : `<span class="countdown ${countdownClass(dias)}">${countdownLabel(dias)}</span>`
-                }
+            ? '<span class="badge g">Concluído</span>'
+            : `<span class="countdown ${countdownClass(dias)}">${countdownLabel(dias)}</span>`
+          }
               </td>
               <td>
                 ${!p.concluido
-                  ? `<button class="btn btn-ghost btn-sm" onclick="marcarPrazoConcluido('${p.id}')">✓ Concluir</button>`
-                  : ''
-                }
+            ? `<button class="btn btn-ghost btn-sm" onclick="marcarPrazoConcluido('${p.id}')">✓ Concluir</button>`
+            : ''
+          }
               </td>
             </tr>
           `;
-        }).join('')}
+      }).join('')}
       </tbody>
     </table>
   `;
-}
+    }
 
-async function marcarPrazoConcluido(id) {
-  if (!db) return;
-  
-  await db.from('prazos').update({ concluido: true }).eq('id', id);
-  toast('Prazo marcado como concluído ✓', 'ok');
-  loadPrazos();
-  loadDash();
-}
+    async function marcarPrazoConcluido(id) {
+      if (!db) return;
 
-/* ─── INIT ────────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', function() {
-  // TEMA: Carrega preferência salva ou usa dark como padrão
-  const savedTheme = localStorage.getItem('comprasgov-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  updateThemeIcon(savedTheme);
-  
-  // Toggle de tema
-  document.getElementById('theme-toggle').addEventListener('click', function() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('comprasgov-theme', newTheme);
-    updateThemeIcon(newTheme);
-    toast(`Tema ${newTheme === 'dark' ? 'escuro' : 'claro'} ativado`, 'ok');
-  });
-  
-  function updateThemeIcon(theme) {
-    const icon = document.querySelector('.theme-icon');
-    icon.textContent = theme === 'dark' ? '☀' : '☾';
-    document.getElementById('theme-toggle').title = theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro';
-  }
-  
-  // Inicializa Supabase
-  const configOk = initSupabase();
+      await db.from('prazos').update({ concluido: true }).eq('id', id);
+      toast('Prazo marcado como concluído ✓', 'ok');
+      loadPrazos();
+      loadDash();
+    }
 
-  // Sidebar nav
-  document.querySelectorAll('.sb-item[data-nav]').forEach(item => {
-    item.addEventListener('click', () => nav(item.dataset.nav));
-  });
+    /* ─── INIT ────────────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function () {
+      // TEMA: Carrega preferência salva ou usa dark como padrão
+      const savedTheme = localStorage.getItem('comprasgov-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
 
-  // Filtros de fase
-  document.querySelectorAll('.fase-filter').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.fase-filter').forEach(b => b.classList.remove('on'));
-      this.classList.add('on');
-      faseFilter = this.dataset.fase;
-      loadProcessos();
-    });
-  });
+      // Toggle de tema
+      document.getElementById('theme-toggle').addEventListener('click', function () {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('comprasgov-theme', newTheme);
+        updateThemeIcon(newTheme);
+        toast(`Tema ${newTheme === 'dark' ? 'escuro' : 'claro'} ativado`, 'ok');
+      });
 
-  // Fechar modais por backdrop e data-close
-  document.querySelectorAll('.modal-bg').forEach(m =>
-    m.addEventListener('click', e => { if (e.target === m) m.classList.remove('on'); })
-  );
-  document.querySelectorAll('[data-close]').forEach(btn =>
-    btn.addEventListener('click', () => closeModal(btn.dataset.close))
-  );
+      function updateThemeIcon(theme) {
+        const icon = document.querySelector('.theme-icon');
+        icon.textContent = theme === 'dark' ? '☀' : '☾';
+        document.getElementById('theme-toggle').title = theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro';
+      }
 
-  // Botões de novo
-  document.getElementById('btn-novo-proc').addEventListener('click', abrirModalNovoProcesso);
-  document.getElementById('btn-salvar-proc').addEventListener('click', salvarProcesso);
-  document.getElementById('btn-nova-cot').addEventListener('click', abrirModalCotacao);
-  document.getElementById('btn-salvar-cot').addEventListener('click', salvarCotacao);
-  document.getElementById('btn-novo-chk').addEventListener('click', abrirModalChecklist);
-  document.getElementById('btn-salvar-chk').addEventListener('click', salvarChecklist);
+      // Inicializa Supabase
+      const configOk = initSupabase();
 
-  // Selects de processo para cotações e fiscalização
-  document.getElementById('cot-proc-select').addEventListener('change', loadCotacoes);
-  document.getElementById('fisc-proc-select').addEventListener('change', loadChecklist);
+      // Sidebar nav
+      document.querySelectorAll('.sb-item[data-nav]').forEach(item => {
+        item.addEventListener('click', () => nav(item.dataset.nav));
+      });
 
-  // Watch prazo input
-  bindPrazoInput();
+      // Filtros de fase
+      document.querySelectorAll('.fase-filter').forEach(btn => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.fase-filter').forEach(b => b.classList.remove('on'));
+          this.classList.add('on');
+          faseFilter = this.dataset.fase;
+          loadProcessos();
+        });
+      });
 
-  // Carregar dashboard inicial
-  if (!configOk) {
-    document.getElementById('dash-metrics').innerHTML = `
+      // Fechar modais por backdrop e data-close
+      document.querySelectorAll('.modal-bg').forEach(m =>
+        m.addEventListener('click', e => { if (e.target === m) m.classList.remove('on'); })
+      );
+      document.querySelectorAll('[data-close]').forEach(btn =>
+        btn.addEventListener('click', () => closeModal(btn.dataset.close))
+      );
+
+      // Botões de novo
+      document.getElementById('btn-novo-proc').addEventListener('click', abrirModalNovoProcesso);
+      document.getElementById('btn-salvar-proc').addEventListener('click', salvarProcesso);
+      document.getElementById('btn-nova-cot').addEventListener('click', abrirModalCotacao);
+      document.getElementById('btn-salvar-cot').addEventListener('click', salvarCotacao);
+      document.getElementById('btn-novo-chk').addEventListener('click', abrirModalChecklist);
+      document.getElementById('btn-salvar-chk').addEventListener('click', salvarChecklist);
+
+      // Selects de processo para cotações e fiscalização
+      document.getElementById('cot-proc-select').addEventListener('change', loadCotacoes);
+      document.getElementById('fisc-proc-select').addEventListener('change', loadChecklist);
+
+      // Watch prazo input
+      bindPrazoInput();
+
+      // Carregar dashboard inicial
+      if (!configOk) {
+        document.getElementById('dash-metrics').innerHTML = `
       <div style="grid-column:1/-1;">
         <div class="alert y">
           <h4>⚙️ Configure suas credenciais do Supabase</h4>
@@ -1548,13 +2257,14 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
     `;
-    return;
-  }
+        return;
+      }
 
-  loadDash();
-});
+      loadDash();
+    });
 
-let faseFilter = '';
-</script>
+    let faseFilter = '';
+  </script>
 </body>
+
 </html>

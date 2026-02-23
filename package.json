@@ -1,0 +1,13 @@
+{
+  "name": "comprasgov-boituva",
+  "version": "1.0.0",
+  "description": "Sistema de gestão de licitações e compras públicas - Prefeitura de Boituva/SP",
+  "scripts": {
+    "build": "node build.js",
+    "vercel-build": "node build.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "license": "MIT"
+}
