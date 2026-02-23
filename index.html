@@ -1518,21 +1518,31 @@
     let db;
 
     function initSupabase() {
+      console.log('[DEBUG] Iniciando initSupabase...');
+      
       if (typeof SUPABASE_CONFIG === 'undefined') {
-        console.error('SUPABASE_CONFIG não encontrado. Verifique se js/config.js está carregado.');
+        console.error('[DEBUG] SUPABASE_CONFIG não encontrado. Verifique se js/config.js está carregado.');
         return false;
       }
 
+      console.log('[DEBUG] SUPABASE_CONFIG encontrado:', { 
+        URL: SUPABASE_CONFIG.URL ? '***' : 'vazio',
+        ANON_KEY: SUPABASE_CONFIG.ANON_KEY ? '***' : 'vazio'
+      });
+
       if (SUPABASE_CONFIG.URL === 'COLE_SUA_SUPABASE_URL_AQUI' ||
         SUPABASE_CONFIG.ANON_KEY === 'COLE_SUA_ANON_KEY_AQUI') {
+        console.error('[DEBUG] Credenciais não configuradas (placeholder)');
         return false;
       }
 
       try {
+        console.log('[DEBUG] Criando cliente Supabase...');
         db = createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+        console.log('[DEBUG] Cliente Supabase criado com sucesso!');
         return true;
       } catch (err) {
-        console.error('Erro ao criar cliente Supabase:', err);
+        console.error('[DEBUG] Erro ao criar cliente Supabase:', err);
         return false;
       }
     }
@@ -1612,15 +1622,24 @@
        DASHBOARD
     ══════════════════════════════════════════════════════ */
     async function loadDash() {
-      if (!db) return;
+      console.log('[DEBUG] loadDash iniciando...');
+      if (!db) {
+        console.error('[DEBUG] db não inicializado!');
+        return;
+      }
 
       try {
+        console.log('[DEBUG] Carregando processos e prazos...');
         const [{ data: procs, error: errProcs }, { data: prazosData, error: errPrazos }] = await Promise.all([
           db.from('processos').select('*').order('atualizado_em', { ascending: false }),
           db.from('prazos').select('*, processos(numero, objeto)').eq('concluido', false).order('data_limite')
         ]);
 
+        console.log('[DEBUG] Resposta processos:', { data: procs ? 'ok' : 'null', error: errProcs });
+        console.log('[DEBUG] Resposta prazos:', { data: prazosData ? 'ok' : 'null', error: errPrazos });
+
         if (errProcs) {
+          console.error('[DEBUG] Erro ao carregar processos:', errProcs);
           toast('Erro ao carregar processos: ' + errProcs.message, 'err');
           return;
         }
