@@ -1,0 +1,27 @@
+# Credenciais e configurações sensíveis
+js/config.js
+config.js
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dependências (caso adicione depois)
+node_modules/
+dist/
+build/
